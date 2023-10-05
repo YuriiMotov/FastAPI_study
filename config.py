@@ -9,18 +9,5 @@ DB_NAME = os.environ.get("DB_NAME")
 DB_USER = os.environ.get("DB_USER")
 DB_PASS = os.environ.get("DB_PASS")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SECRET_AUTH_COOCKIE = os.environ.get("SECRET_AUTH_COOCKIE")
+SECRET_AUTH_USER_MANAGER = os.environ.get("SECRET_AUTH_USER_MANAGER")
