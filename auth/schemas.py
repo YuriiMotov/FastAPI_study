@@ -14,14 +14,14 @@ class UserRead(schemas.BaseUser[int]):
     is_verified: bool = False
 
     class Config:
-        orm_mode = True
+        from_attributes = True  # UserWarning: Valid config keys have changed in V2:
+                                # 'orm_mode' has been renamed to 'from_attributes'
 
 
 class UserCreate(schemas.BaseUserCreate):
     username: str
     email: str
     password: str
-    role_id: int
     is_active: Optional[bool] = True
     is_superuser: Optional[bool] = False
     is_verified: Optional[bool] = False

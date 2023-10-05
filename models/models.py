@@ -6,6 +6,7 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 from fastapi_users.db import SQLAlchemyBaseUserTable
 
+DEFAULT_USER_ROLE = 1
 
 class Base(DeclarativeBase):
     pass
@@ -44,5 +45,5 @@ class User(SQLAlchemyBaseUserTable[int], Base):
         TIMESTAMP, default=datetime.utcnow
     )
     role_id: Mapped[Role] = mapped_column(
-        ForeignKey(Role.id)
+        ForeignKey(Role.id), default=DEFAULT_USER_ROLE
     )
