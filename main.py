@@ -12,7 +12,7 @@ from fastapi.responses import JSONResponse
 from auth.auth import auth_backend
 from auth.database import User
 from auth.manager import get_user_manager
-from auth.schemas import UserRead, UserCreate
+from auth.schemas import UserRead, UserCreate, UserUpdate
 
 app = FastAPI(
     title="Trading App"
@@ -32,6 +32,22 @@ app.include_router(
 
 app.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
+    prefix='/auth',
+    tags=['auth']
+)
+
+
+# It will generate /forgot-password and /reset-password routes
+app.include_router(
+    fastapi_users.get_reset_password_router(),
+    prefix='/auth',
+    tags=['auth']
+)
+
+
+# It will generate routes to watch and change user's data
+app.include_router(
+    fastapi_users.get_users_router(UserRead, UserUpdate),
     prefix='/auth',
     tags=['auth']
 )
