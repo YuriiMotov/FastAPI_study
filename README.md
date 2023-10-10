@@ -30,6 +30,6 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
     
     Commits: [8890f19 and eee3d60](https://github.com/YuriiMotov/FastAPI_study/compare/943af454ef227aaf565241959339d28398db29e5...eee3d60a8364741d3ad26e4fbe702b4ef8719dd5)
 
-6. `Cookie` transport is useful if you use web-browser. To use this API from mobile apps or from other systems, let's try to use `Bearer` transport and `Database` strategy.
+6. `Cookie` transport is useful if you use web-browser. To use this API from mobile apps or from other systems, let's learn how to use `Bearer` transport and `Database` strategy.
     
-    TODO
+    Commit: [c9369cb](https://github.com/YuriiMotov/FastAPI_study/compare/560889777d34e7ceccb85f10c8149b4f13a673ac...c9369cbb75c0ad51da94448c6859c010c1c2af63)
