@@ -10,6 +10,7 @@ from fastapi_users_db_sqlalchemy.access_token import SQLAlchemyBaseAccessTokenTa
 
 DEFAULT_USER_ROLE = 1
 
+
 class Base(DeclarativeBase):
     pass
 

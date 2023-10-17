@@ -9,11 +9,13 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
 ### Lesson 5
 
+(Watch on Youtube)[https://youtu.be/nfueh3ei8HU?si=2CGerqFNvvFD2PJf]
+
 1. Why do we have to use 2 differend drivers for PostgreSQL (psycopg2 for fastapi, and asyncpg for alembic)? Let's use psycopg3 in both places!
 
     Commit: [3f22c0b](https://github.com/YuriiMotov/FastAPI_study/compare/6b80518715253e197c1387bfaf9183c63ec57dd4...3f22c0b9031b220bbd952ca0d9222baa3b8ea9de)
 
-2. Get rid of duplicating `User` database model . In the original lesson's code there are two places where this model is declared (`models.model.py` and `auth.database.py`) and you have to maintain both of these models in the same condition. It's bad and I think we can declare it once in `models.model.py` and inherit from `SQLAlchemyBaseUserTable`.
+2. Getting rid of duplicating `User` database model . In the original lesson's code there are two places where this model is declared (`models.model.py` and `auth.database.py`) and you have to maintain both of these models in the same condition. It's bad and I think we can declare it once in `models.model.py` and inherit from `SQLAlchemyBaseUserTable`.
 Also, new version of `fastapi-users` documentation follows the orm style to declare this table. So, let's use the same style in `models.py`.
 
     Commit: [5034ae2](https://github.com/YuriiMotov/FastAPI_study/compare/3f22c0b9031b220bbd952ca0d9222baa3b8ea9de...5034ae295a89f45b851aa88ba514e0880bce77b6)
@@ -33,3 +35,21 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 6. `Cookie` transport is useful if you use web-browser. To use this API from mobile apps or from other systems, let's learn how to use `Bearer` transport and `Database` strategy.
     
     Commit: [c9369cb](https://github.com/YuriiMotov/FastAPI_study/compare/560889777d34e7ceccb85f10c8149b4f13a673ac...c9369cbb75c0ad51da94448c6859c010c1c2af63)
+
+
+### Lesson 6
+
+(Watch on Youtube)[https://youtu.be/1Ag3RoOjNI0?si=9fCKIKzLjdu5ckBu]
+
+0. Changing project structure and adding `operations` module as it's shown in lesson's source code.
+
+    Commit: ...
+
+1. Using one metadata object for all database models, using ORM-style to declare `operations` table. Getting rid of depricated `dict` method in `operations.router`.
+
+    TODO
+
+2. Grouping `auth` routes into one router and include it in main.
+
+    TODO
+

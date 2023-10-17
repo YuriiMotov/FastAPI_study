@@ -5,18 +5,20 @@ from fastapi_users.authentication import (
 from fastapi_users.authentication import JWTStrategy
 from fastapi_users.authentication.strategy.db import AccessTokenDatabase, DatabaseStrategy
 
-
+from auth.models import AccessToken
+from auth.utils import get_access_token_db
 from config import SECRET_AUTH_COOKIE
-from models.models import AccessToken
-from .database import get_access_token_db
+
 
 cookie_transport = CookieTransport(cookie_name="bonds", cookie_max_age=3600)
 bearer_transport = BearerTransport(tokenUrl="auth/db/login")
 
 SECRET = SECRET_AUTH_COOKIE
 
+
 def get_jwt_strategy() -> JWTStrategy:
     return JWTStrategy(secret=SECRET, lifetime_seconds=3600)
+
 
 def get_database_strategy(
     access_token_db: AccessTokenDatabase[AccessToken] = Depends(get_access_token_db),

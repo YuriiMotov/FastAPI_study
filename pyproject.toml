@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[project]
+name = "fastapi_course"
+version = "0.0.1"
+authors = [
+    { name = "yurii", email = "motovyuri@ya.ru" },
+]
+description = "fastapi_course"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+]
+[project.optional-dependencies]
+test = [
+    "pytest"
+]
+lint = [
+    "flake8"
+]
+

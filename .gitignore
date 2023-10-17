@@ -1,3 +1,4 @@
 .env
 __pycache__
-db_init_tmp.py
+*.egg-info
+src/fastapi_course.egg-info/PKG-INFO

@@ -9,13 +9,15 @@ from fastapi import FastAPI, Request, status, Depends
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 
-from auth.auth import (
+from auth.base_config import (
     auth_backend_cookie_jwt,
     auth_backend_bearer_db 
 )
-from auth.database import User
+from auth.models import User
 from auth.manager import get_user_manager
 from auth.schemas import UserRead, UserCreate, UserUpdate
+from operations.router import router as router_operation
+
 
 app = FastAPI(
     title="Trading App"
@@ -62,3 +64,6 @@ app.include_router(
     prefix='/auth',
     tags=['auth']
 )
+
+
+app.include_router(router_operation)
