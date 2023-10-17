@@ -43,7 +43,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 0. Changing project structure and adding `operations` module as it's shown in lesson's source code.
 
-    Commit: ...
+    Commit: [bc4f100](https://github.com/YuriiMotov/FastAPI_study/compare/773a6927511356004b6929cbbd2e028eb434059b...bc4f100ae25f68c46768f9cdf2fdf2c4ddf1072c)
 
 1. Using one metadata object for all database models, using ORM-style to declare `operations` table. Getting rid of depricated `dict` method in `operations.router`.
 

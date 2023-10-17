@@ -10,8 +10,11 @@ from alembic import context
 sys.path.append(os.path.join(sys.path[0], 'src'))
 
 from config import DB_HOST, DB_PORT, DB_USER, DB_NAME, DB_PASS
-from auth.models import Base as Base_auth
-from operations.models import metadata as metadata_operations
+from database import Base
+
+# Importing all database models
+from auth import models
+from operations import models
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -34,7 +37,7 @@ config.set_section_option(section, "DB_PASS", DB_PASS)
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = [Base_auth.metadata, metadata_operations]
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
