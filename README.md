@@ -51,5 +51,8 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 2. Grouping `auth` routes into module `router` and include this router in `main`.
 
-    Commit: []()
+    Commit: [6fbd3fd](https://github.com/YuriiMotov/FastAPI_study/compare/01e52f57afdf2cfee32352d270d4901ccc22f3ca...6fbd3fd16904fbf571df266e6ab19bdd26de2076)
 
+3. Configuring the migration file name format to include date and time.
+
+    Commit: []()
