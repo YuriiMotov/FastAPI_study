@@ -88,4 +88,4 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 4. Catching `database error`, `doesn't exist` and `already exist` errors. Moving the handling of common errors outside of endpoint's functions.
 
-    Commit: 
+    Commit: [a0ecbdd](https://github.com/YuriiMotov/FastAPI_study/compare/520b166bb45dc290c0faeb6aa6d00d206bb96600...a0ecbddb75298ce235da71d09c32920511fa74ae)
