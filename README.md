@@ -68,9 +68,17 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 1. Doing lesson's homework #1 (using HTTP PUT and PATCH methods)
 
-    Commit: 
+    Commit: [27fab33](https://github.com/YuriiMotov/FastAPI_study/compare/c8b1b78aeb3d72b095dcf294d873d85dec1127ae...27fab33a666cd12bafc9a4914c6ca793eabead2b)
 
-2. Doing lesson's homework #2 (standardization of input and output of of all the endpoint interfaces)
+2. Doing lesson's homework #2 (standardization of input and output of all the endpoint interfaces).
+
+    Speaking about standartization of endpoints, I don't think that suggested in this lesson approach is good. `Fastapi-users` doesn't follow this approach and we have to modify that endpoints to make them similar.
+    
+    I don't really understand why we need to add additional fields `status` and `detail` to successful response. At the same time we dont need some of these fields in other types of responses.
+    
+    We have `HTTP response status code` for passing status and I think it's better to use it instead of additional `status` field. The response to a successful request will contain only data (at the first level, without the additional `data` field), for unsuccessful requests it will contain the `detail` field (as it is done in `fatsapi-users`).
+
+    In addition, let's specify the response schemes for the endpoints of the `operations` module.
 
     Commit: 
 
