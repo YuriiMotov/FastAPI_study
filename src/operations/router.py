@@ -6,15 +6,18 @@ from database import get_async_session
 from operations.models import Operation
 from operations.schemas import OperationCreate, OperationUpdate
 
+OPERATIONS_PER_PAGE = 3
+
 router = APIRouter()
 
 # Get operations with specific type
 @router.get("/")
 async def get_specific_operations(
-    operation_type: str, session: AsyncSession = Depends(get_async_session)
+    operation_type: str, page: int = 1, session: AsyncSession = Depends(get_async_session)
 ) -> list[OperationCreate]:
     try:
-        query = select(Operation).where(Operation.type == operation_type)
+        query = select(Operation).where(Operation.type == operation_type) \
+                    .limit(OPERATIONS_PER_PAGE).offset(OPERATIONS_PER_PAGE * (page - 1))
         result = await session.scalars(query)
         return result.all()
 

@@ -80,7 +80,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     In addition, let's specify the response schemes for the endpoints of the `operations` module.
 
-    Commit: 
+    Commit: [1eedb71](https://github.com/YuriiMotov/FastAPI_study/compare/27fab33a666cd12bafc9a4914c6ca793eabead2b...1eedb71149d7dcc13716a04c8dd70e83ffb84f29)
 
 3. Doing lesson's homework #3 (pagination of results)
 
