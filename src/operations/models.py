@@ -16,4 +16,9 @@ class Operation(Base):
     date: Mapped[TIMESTAMP] = mapped_column(TIMESTAMP, nullable=False)
     type: Mapped[str] = mapped_column(nullable=False)
 
+    def update_from_dict(self, data: dict):
+        for attr, val in data.items():
+            if val is not None:
+                self.__setattr__(attr, val)
+
 

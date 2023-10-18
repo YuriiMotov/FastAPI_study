@@ -56,3 +56,28 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 3. Configuring the migration file name format to include date and time.
 
     Commit: [bfb7e1c](https://github.com/YuriiMotov/FastAPI_study/compare/6fbd3fd16904fbf571df266e6ab19bdd26de2076...bfb7e1c5fcdc0cf29d348516e9b1ba5ca6cc917c)
+
+
+### Lesson 7
+
+[Watch original lesson on Youtube](https://youtu.be/-RLXmoQ7iSE?si=l7q2lWuzxhpTp5uY)
+
+0. Implementation of changes made in the lesson #7
+
+    Commit: [c8b1b78](https://github.com/YuriiMotov/FastAPI_study/compare/1930af6a4b905d4780fc41edbeb12f26292d222f...c8b1b78aeb3d72b095dcf294d873d85dec1127ae)
+
+1. Doing lesson's homework #1 (using HTTP PUT and PATCH methods)
+
+    Commit: 
+
+2. Doing lesson's homework #2 (standardization of input and output of of all the endpoint interfaces)
+
+    Commit: 
+
+3. Doing lesson's homework #3 (pagination of results)
+
+    Commit: 
+
+4. Catching `database error`, `doesn't exist` and `already exist` errors
+
+    Commit: 
