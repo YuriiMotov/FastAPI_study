@@ -9,7 +9,7 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
 ### Lesson 5
 
-[Watch on Youtube](https://youtu.be/nfueh3ei8HU?si=2CGerqFNvvFD2PJf)
+[Watch original lesson on Youtube](https://youtu.be/nfueh3ei8HU?si=2CGerqFNvvFD2PJf)
 
 1. Why do we have to use 2 differend drivers for PostgreSQL (psycopg2 for fastapi, and asyncpg for alembic)? Let's use psycopg3 in both places!
 
@@ -39,7 +39,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 ### Lesson 6
 
-[Watch on Youtube](https://youtu.be/1Ag3RoOjNI0?si=9fCKIKzLjdu5ckBu)
+[Watch original lesson on Youtube](https://youtu.be/1Ag3RoOjNI0?si=9fCKIKzLjdu5ckBu)
 
 0. Changing project structure and adding `operations` module as it's shown in lesson's source code.
 

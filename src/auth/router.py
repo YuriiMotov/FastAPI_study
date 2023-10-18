@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi_users import fastapi_users, FastAPIUsers
 
-from auth.base_config import (
+from auth.backends import (
     auth_backend_cookie_jwt,
     auth_backend_bearer_db 
 )
