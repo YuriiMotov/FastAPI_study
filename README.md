@@ -80,12 +80,12 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     In addition, let's specify the response schemes for the endpoints of the `operations` module.
 
-    Commit: [1eedb71](https://github.com/YuriiMotov/FastAPI_study/compare/27fab33a666cd12bafc9a4914c6ca793eabead2b...1eedb71149d7dcc13716a04c8dd70e83ffb84f29)
+    Commits: [1eedb71](https://github.com/YuriiMotov/FastAPI_study/compare/27fab33a666cd12bafc9a4914c6ca793eabead2b...1eedb71149d7dcc13716a04c8dd70e83ffb84f29) and [520b166](https://github.com/YuriiMotov/FastAPI_study/compare/fb0c76772dbd75479884cda21a6a01fb473b6bb8...520b166bb45dc290c0faeb6aa6d00d206bb96600)
 
 3. Doing lesson's homework #3 (pagination of results)
 
-    Commit: 
+    Commit: [fb0c767](https://github.com/YuriiMotov/FastAPI_study/compare/1eedb71149d7dcc13716a04c8dd70e83ffb84f29...fb0c76772dbd75479884cda21a6a01fb473b6bb8)
 
-4. Catching `database error`, `doesn't exist` and `already exist` errors
+4. Catching `database error`, `doesn't exist` and `already exist` errors. Moving the handling of common errors outside of endpoint's functions.
 
     Commit: 
