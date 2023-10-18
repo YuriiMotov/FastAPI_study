@@ -45,9 +45,9 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [bc4f100](https://github.com/YuriiMotov/FastAPI_study/compare/773a6927511356004b6929cbbd2e028eb434059b...bc4f100ae25f68c46768f9cdf2fdf2c4ddf1072c)
 
-1. Using one metadata object for all database models, using ORM-style to declare `operations` table. Getting rid of depricated `dict` method in `operations.router`.
+1. Using one metadata object for all database models, using ORM-style to declare `operations` table. Getting rid of depricated `dict` method in `operations.router`. Renaming `base_config` to `backends`.
 
-    Commit: [01e52f5](https://github.com/YuriiMotov/FastAPI_study/compare/bc4f100ae25f68c46768f9cdf2fdf2c4ddf1072c...01e52f57afdf2cfee32352d270d4901ccc22f3ca)
+    Commits: [01e52f5](https://github.com/YuriiMotov/FastAPI_study/compare/bc4f100ae25f68c46768f9cdf2fdf2c4ddf1072c...01e52f57afdf2cfee32352d270d4901ccc22f3ca), [bc7c563](https://github.com/YuriiMotov/FastAPI_study/compare/85168cea877c49caa3a62a2e58c1c11278528d80...bc7c56396c9dfbfdb481199fbf5865df9770c9e9)
 
 2. Grouping `auth` routes into module `router` and include this router in `main`.
 
