@@ -1,5 +1,6 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
+from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_async_session
@@ -11,9 +12,20 @@ router = APIRouter()
 
 @router.get("/")
 async def get_specific_operations(operation_type: str, session: AsyncSession = Depends(get_async_session)):
-    query = select(Operation).where(Operation.type == operation_type)
-    result = await session.scalars(query)
-    return result.all()
+    try:
+        query = select(Operation).where(Operation.type == operation_type)
+        result = await session.scalars(query)
+        return {
+            "status": "success",
+            "data": result.all(),
+            "details": None
+        }
+    except Exception:
+        raise HTTPException(status_code=500, detail={
+            "status": "error",
+            "data": None,
+            "details": None
+        })
 
 
 @router.post("/")
