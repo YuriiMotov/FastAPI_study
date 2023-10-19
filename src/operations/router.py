@@ -1,4 +1,6 @@
+import asyncio
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi_cache.decorator import cache
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -14,6 +16,7 @@ router = APIRouter()
 
 # Get operations with specific type
 @router.get("/")
+@cache(expire=5)
 async def get_specific_operations(
     operation_type: str, page: int = 1, session: AsyncSession = Depends(get_async_session)
 ) -> list[OperationRead]:
@@ -21,6 +24,14 @@ async def get_specific_operations(
                 .limit(OPERATIONS_PER_PAGE).offset(OPERATIONS_PER_PAGE * (page - 1))
     result = await session.scalars(query)
     return result.all()
+
+
+# Long operation
+@router.get("/long-operation")
+@cache(expire=30)
+async def process_long_operations() -> str:
+    await asyncio.sleep(5)
+    return "results"
 
 
 # Create operation
