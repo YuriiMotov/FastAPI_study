@@ -7,7 +7,7 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
 ## Improvements:
 
-### Lesson 5
+### Lesson 5 (user registration and authentification with fastapi-users)
 
 [Watch original lesson on Youtube](https://youtu.be/nfueh3ei8HU?si=2CGerqFNvvFD2PJf)
 
@@ -37,7 +37,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
     Commit: [c9369cb](https://github.com/YuriiMotov/FastAPI_study/compare/560889777d34e7ceccb85f10c8149b4f13a673ac...c9369cbb75c0ad51da94448c6859c010c1c2af63)
 
 
-### Lesson 6
+### Lesson 6 (routers and project file structure)
 
 [Watch original lesson on Youtube](https://youtu.be/1Ag3RoOjNI0?si=9fCKIKzLjdu5ckBu)
 
@@ -58,7 +58,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
     Commit: [bfb7e1c](https://github.com/YuriiMotov/FastAPI_study/compare/6fbd3fd16904fbf571df266e6ab19bdd26de2076...bfb7e1c5fcdc0cf29d348516e9b1ba5ca6cc917c)
 
 
-### Lesson 7
+### Lesson 7 (designing a RESTful API)
 
 [Watch original lesson on Youtube](https://youtu.be/-RLXmoQ7iSE?si=l7q2lWuzxhpTp5uY)
 
@@ -95,3 +95,17 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [3d2f69e](https://github.com/YuriiMotov/FastAPI_study/compare/8b2cd6d8651f453b54cbc2e382b357b54b0b1b70...3d2f69ed196d9d86e902b5c09ca4e037c492c08d)
 
+
+### Lesson 8 (caching with Redis)
+
+[Watch original lesson on Youtube](https://youtu.be/t4H25XJG0Uc?si=OQjZL-M3TjIfDp98)
+
+0. Implementation of changes made in the lesson #8
+
+    Commit: []()
+
+1. Let's try to use `fastapi-cache` with `InMemoryBackend`
+
+    Commit: []()
+
+    
