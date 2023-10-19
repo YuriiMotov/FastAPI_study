@@ -1,7 +1,8 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi_cache import FastAPICache
-from fastapi_cache.backends.inmemory import InMemoryBackend
+from fastapi_cache.backends.redis import RedisBackend
+from redis import asyncio as aioredis
 from sqlalchemy.exc import SQLAlchemyError
 
 from auth.router import router as router_auth
@@ -15,7 +16,8 @@ app = FastAPI(
 
 @app.on_event("startup")
 async def startup():
-    FastAPICache.init(InMemoryBackend())
+    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
 
 
 @app.exception_handler(SQLAlchemyError)
