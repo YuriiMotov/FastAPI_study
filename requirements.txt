@@ -1,6 +1,6 @@
 alembic
 fastapi[all]
-fastapi-cache[redis]
+fastapi-cache
 fastapi-users[sqlalchemy]
 psycopg[binary]
 python-dotenv
