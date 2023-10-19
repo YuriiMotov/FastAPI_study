@@ -13,6 +13,7 @@ app = FastAPI(
 
 @app.exception_handler(SQLAlchemyError)
 async def database_exception_handler(request: Request, exc: SQLAlchemyError):
+    print(exc)
     # Generate ticket for this problem and notify the admin
     ticket_id = 1 
 
@@ -27,6 +28,7 @@ async def database_exception_handler(request: Request, exc: SQLAlchemyError):
 
 @app.exception_handler(Exception)
 async def unknown_exception_handler(request: Request, exc: Exception):
+    print(exc)
     # Generate ticket for this problem and notify the admin
     ticket_id = 1 
 
