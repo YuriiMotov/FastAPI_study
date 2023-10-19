@@ -102,10 +102,9 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 0. Implementation of changes made in the lesson #8
 
-    Commit: []()
+    Commit: [8b28197](https://github.com/YuriiMotov/FastAPI_study/compare/beeec6511485355a96c51581d9e13154457133a1...8b28197da11285a8abbadaae946c455b4d2f447b)
 
 1. Let's try to use `fastapi-cache` with `InMemoryBackend`
 
     Commit: []()
 
-    
