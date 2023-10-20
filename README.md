@@ -109,5 +109,14 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [d4ea3e3](https://github.com/YuriiMotov/FastAPI_study/compare/6996d3b1d0446dedf3193c89034af1deb82e48fa...d4ea3e3ffc43f4c08daf6a3ec5c81a6d322c073a)
 
-    
+2. Let's learn how to manage client-side caching by setting headers.
+
+    Commit: [cb97d4f](https://github.com/YuriiMotov/FastAPI_study/compare/e7b29bde101c0c509820c25372ceab2376eb0887...cb97d4fa4dad3b72f6532dc8d93034e2c6516560)
+
+3. Deeping into `fastapi-cache` library.
+    Here are some problems (or potential problems) of this library that I found:
+        1. Caching doesn't work for private endpoints. If I pass a `user` object to my endpoint function and try to use this endpoint by opening in browser, it isn't cached. It's cached only on client side. I'm sure this problem can be solved by implementing custom key-builder, but it looks like a feature that should be by default.
+        2. For private methods this library generates `cache-control: max-age=N` headers, but it doesn't add `Cache-Control: private`. This can lead to the leakage of personal data if the proxy server caches this data.
+        3. There is no parameter to disable client-side cache headers in `cache` decorator. And you can't just override it in you function by adding `response.headers["Cache-Control"] = "no-store"` (they are added after the function call and will be overrided). People write middleware to do this, which is not good.
+        4. There are quite a lot of issues on project's github page and some PRs. It looks like project owner doesn't have enought time to continue developing this project..
 
