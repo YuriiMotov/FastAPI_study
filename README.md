@@ -107,5 +107,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 1. Let's try to use `fastapi-cache` with `InMemoryBackend`.
     Note that `InMemoryBackend` store cache data in memory and use lazy delete, which mean if you don't access it after cached, it will not delete automatically.
 
-    Commit: [d4ea3e3](https://github.com/YuriiMotov/FastAPI_study/compare/8b28197da11285a8abbadaae946c455b4d2f447b...d4ea3e3ffc43f4c08daf6a3ec5c81a6d322c073a)
+    Commit: [d4ea3e3](https://github.com/YuriiMotov/FastAPI_study/compare/6996d3b1d0446dedf3193c89034af1deb82e48fa...d4ea3e3ffc43f4c08daf6a3ec5c81a6d322c073a)
+
+    
 
