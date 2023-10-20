@@ -125,5 +125,11 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
     3.4. There are quite a lot of issues on project's github page and some PRs. It looks like project owner doesn't have enought time to continue developing this project..
 
 
+### Lesson 9 (background tasks with Celery, Redis and Flower)
 
+[Watch original lesson on Youtube](https://youtu.be/fm4LTvMyiwE?si=Gnl-5Hcn2SC8MuD2)
+
+0. Implementation of changes made in the lesson #9
+
+    Commit: []()
 

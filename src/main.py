@@ -7,7 +7,7 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from auth.router import router as router_auth
 from operations.router import router as router_operation
-
+from tasks.router import router as router_tasks
 
 app = FastAPI(
     title="Trading App"
@@ -62,4 +62,11 @@ app.include_router(
     router_operation,
     prefix='/operations',
     tags=['operations']
+)
+
+# Tasks
+app.include_router(
+    router_tasks,
+    prefix='/tasks',
+    tags=['tasks']
 )

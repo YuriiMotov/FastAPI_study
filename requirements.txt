@@ -1,7 +1,9 @@
 alembic
+celery
 fastapi[all]
 fastapi-cache[redis]
 fastapi-users[sqlalchemy]
+flower
 psycopg[binary]
 python-dotenv
 setuptools
