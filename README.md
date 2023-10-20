@@ -115,8 +115,13 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 3. Deeping into `fastapi-cache` library.
     Here are some problems (or potential problems) of this library that I found:
+        
         1. Caching doesn't work for private endpoints. If I pass a `user` object to my endpoint function and try to use this endpoint by opening in browser, it isn't cached. It's cached only on client side. I'm sure this problem can be solved by implementing custom key-builder, but it looks like a feature that should be by default.
+
         2. For private methods this library generates `cache-control: max-age=N` headers, but it doesn't add `Cache-Control: private`. This can lead to the leakage of personal data if the proxy server caches this data.
+
         3. There is no parameter to disable client-side cache headers in `cache` decorator. And you can't just override it in you function by adding `response.headers["Cache-Control"] = "no-store"` (they are added after the function call and will be overrided). People write middleware to do this, which is not good.
+
         4. There are quite a lot of issues on project's github page and some PRs. It looks like project owner doesn't have enought time to continue developing this project..
+
 
