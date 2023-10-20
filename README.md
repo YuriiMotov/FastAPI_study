@@ -138,8 +138,10 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
     1.1. With FastAPI BackgroundTasks we can add try..except block in the background task's function and call our ErrorCallback function if any exceptions occur.
 
         Commit: []()
-        
-    1.2. 
+
+    1.2. With Celery we can handle task's execution errors via signals.
+
+        Commit: []()
 
 2. Task execution monitoring
 
