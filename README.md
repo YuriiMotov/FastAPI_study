@@ -131,5 +131,16 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 0. Implementation of changes made in the lesson #9
 
-    Commit: []()
+    Commit: [2d0f98f](https://github.com/YuriiMotov/FastAPI_study/compare/d782fa57272a10d8a0192f62d041aa15cec7f52b...2d0f98fe55a57e41b6c34928c2bb45f1e7a1f5e6)
 
+1. Let's add a background task execution check. If there is a problem during tha task execution then system will call special function.
+
+    1.1. With FastAPI BackgroundTasks we can add try..except block in the background task's function and call our ErrorCallback function if any exceptions occur.
+
+        Commit: []()
+        
+    1.2. 
+
+2. Task execution monitoring
+
+3. Playing with task priorities.
