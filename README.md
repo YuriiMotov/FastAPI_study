@@ -109,9 +109,5 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [d4ea3e3](https://github.com/YuriiMotov/FastAPI_study/compare/6996d3b1d0446dedf3193c89034af1deb82e48fa...d4ea3e3ffc43f4c08daf6a3ec5c81a6d322c073a)
 
-2. Let's learn how to manage client-side caching by setting headers.
-
-    Commit: []()
-
-
+    
 

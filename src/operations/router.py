@@ -1,5 +1,5 @@
 import asyncio
-from fastapi import APIRouter, Depends, HTTPException, Response
+from fastapi import APIRouter, Depends, HTTPException
 from fastapi_cache.decorator import cache
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -30,13 +30,6 @@ async def get_specific_operations(
 @router.get("/long-operation")
 @cache(expire=30)
 async def process_long_operations() -> str:
-    await asyncio.sleep(5)
-    return "results"
-
-# Long operation with client-side caching
-@router.get("/long-operation2")
-async def process_long_operations2(response: Response) -> str:
-    response.headers["Cache-Control"] = "max-age=60"
     await asyncio.sleep(5)
     return "results"
 
