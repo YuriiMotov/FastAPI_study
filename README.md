@@ -137,13 +137,13 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     1.1. With FastAPI BackgroundTasks we can add try..except block in the background task's function and call our ErrorCallback function if any exceptions occur.
 
-        Commit: []()
+        Commit: [8063d38](https://github.com/YuriiMotov/FastAPI_study/compare/2d0f98fe55a57e41b6c34928c2bb45f1e7a1f5e6...8063d38a1ee6fb2eae89d6dfae8c2dd9f6e26b63)
 
     1.2. With Celery we can handle task's execution errors different ways:
         
         1.2.1. On the worker's side by using signals or specifying base class for task.
 
-            Commit: []()
+            Commit: [ff65eee](https://github.com/YuriiMotov/FastAPI_study/compare/4abab4a9d828f8d48b34cedb873acd808d8bbe2f...ff65eee9d6212e641e035e7b49eb0600c48057a3)
 
         1.2.2. On the FastAPI side by adding special async task for monitoring celery's task statuses. You can also implement it with Celery events real-time processing (you should run it in a separate thread), but I prefer first variant. 
 
