@@ -139,9 +139,15 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
         Commit: []()
 
-    1.2. With Celery we can handle task's execution errors via signals.
+    1.2. With Celery we can handle task's execution errors different ways:
+        
+        1.2.1. On the worker's side by using signals or specifying base class for task.
 
-        Commit: []()
+            Commit: []()
+
+        1.2.2. On the FastAPI side by adding special async task for monitoring celery's task statuses. You can also implement it with Celery events real-time processing (you should run it in a separate thread), but I prefer first variant. 
+
+            Commit: []()
 
 2. Task execution monitoring
 

@@ -1,10 +1,16 @@
-from fastapi import APIRouter, BackgroundTasks, Depends
+from fastapi import APIRouter
 
-from auth.router import fastapi_users
+from .tasks import long_celery_task_with_exception    
 
-from .tasks import (
-    long_background_task_with_exception, background_task_error_handler,
-)
 
 router = APIRouter()
+
+
+# Long operation in the background with the result's checking (Celery)
+@router.get(
+    '/long-operation-celery-check',
+    status_code=202
+)
+async def long_operation_celery_with_result_checking():
+    long_celery_task_with_exception.delay("parameter value")
 
