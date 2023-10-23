@@ -1,4 +1,5 @@
 import asyncio
+from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi_cache import FastAPICache
@@ -11,21 +12,22 @@ from celery_monitor.monitor import celery_tasks_monitor
 from operations.router import router as router_operation
 from tasks.router import router as router_tasks
 
-app = FastAPI(
-    title="Trading App"
-)
 
-
-@app.on_event("startup")
-async def startup():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # `On startup` actions
     redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
     celery_tasks_monitor.aio_task = asyncio.create_task(celery_tasks_monitor.loop())
-
-
-@app.on_event("shutdown")
-async def shutdown():
+    yield
+    # `On shoutdown` actions
     celery_tasks_monitor.stop()
+
+
+app = FastAPI(
+    title="Trading App",
+    lifespan=lifespan
+)
 
 
 @app.exception_handler(SQLAlchemyError)
