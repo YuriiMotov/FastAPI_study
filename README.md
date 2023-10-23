@@ -149,7 +149,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [c3e3271](https://github.com/YuriiMotov/FastAPI_study/compare/7af91792ccb89116e74fb917078dae353143d805...c3e3271af197190a9b6eb31a89a33ee3c925fafa)
 
-2. Using FastAPI's `on_startup` and `on_shoutdown` events are deprecated, we should use `lifespan` instead.
+2. The use of FastAPI's `on_startup` and `on_shoutdown` events is deprecated, we should use `lifespan` instead.
 
     Commit: [fd61e6b](https://github.com/YuriiMotov/FastAPI_study/compare/c3e3271af197190a9b6eb31a89a33ee3c925fafa...fd61e6b08d769861819d85575be6dcb94505127b)
 

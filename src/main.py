@@ -8,7 +8,6 @@ from redis import asyncio as aioredis
 from sqlalchemy.exc import SQLAlchemyError
 
 from auth.router import router as router_auth
-from celery_monitor.monitor import celery_tasks_monitor
 from operations.router import router as router_operation
 from tasks.router import router as router_tasks
 
@@ -18,10 +17,8 @@ async def lifespan(app: FastAPI):
     # `On startup` actions
     redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
-    celery_tasks_monitor.aio_task = asyncio.create_task(celery_tasks_monitor.loop())
     yield
     # `On shoutdown` actions
-    celery_tasks_monitor.stop()
 
 
 app = FastAPI(
