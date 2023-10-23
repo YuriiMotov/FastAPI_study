@@ -155,7 +155,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 3. Adding task execution monitoring endpoins.
 
-    Commit: []()
+    Commit: [ce7f425](https://github.com/YuriiMotov/FastAPI_study/compare/1d6619017dcd0f81ffe0daece65aa49944005a0b...ce7f4257a782b0439b1749fc0b3e7084af730f3c)
 
 4. Playing with task priorities.
 
