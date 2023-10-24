@@ -153,17 +153,18 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [fd61e6b](https://github.com/YuriiMotov/FastAPI_study/compare/c3e3271af197190a9b6eb31a89a33ee3c925fafa...fd61e6b08d769861819d85575be6dcb94505127b)
 
-3. Adding task execution monitoring endpoins.
+3. Adding celery-task execution monitoring endpoins.
 
     Commit: [ce7f425](https://github.com/YuriiMotov/FastAPI_study/compare/1d6619017dcd0f81ffe0daece65aa49944005a0b...ce7f4257a782b0439b1749fc0b3e7084af730f3c)
 
-4. Playing with task priorities.
+4. Playing with celery-task priorities.
 
     4.1. Redis priorities. This approach can be used if you use Redis as a backend, your tasks are not long and you do not need very high prioritization.
     It's important to run worker with `--prefetch-multiplier=1` option. Otherwise Celery will preload `(CPU_cores_count)*4` tasks from the queue by one request.
     
-    Commit: []()
+    Commit: [fdca370](https://github.com/YuriiMotov/FastAPI_study/compare/4bfa7f24f4491f93b6c9a6c5eb59701dc8ab7fad...fdca37094623f85dfc642922527f3e09e1bac7a6)
 
     4.2. More common approach is to separate queues and run multiple workers for different queues.
 
-    Commit: []()
+    Commit: [f0d87c3](https://github.com/YuriiMotov/FastAPI_study/compare/fdca37094623f85dfc642922527f3e09e1bac7a6...f0d87c3ef0b8a7d5362a64633a030fb45825b5fb)
+
