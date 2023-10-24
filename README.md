@@ -159,4 +159,11 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 4. Playing with task priorities.
 
+    4.1. Redis priorities. This approach can be used if you use Redis as a backend, your tasks are not long and you do not need very high prioritization.
+    It's important to run worker with `--prefetch-multiplier=1` option. Otherwise Celery will preload `(CPU_cores_count)*4` tasks from the queue by one request.
+    
+    Commit: []()
+
+    4.2. More common approach is to separate queues and run multiple workers for different queues.
+
     Commit: []()
