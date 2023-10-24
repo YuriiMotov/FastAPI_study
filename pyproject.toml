@@ -28,3 +28,9 @@ lint = [
     "flake8"
 ]
 
+[tool.pytest.ini_options]
+pythonpath = [
+    ".", "src"
+]
+asyncio_mode = "auto"
+
