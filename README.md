@@ -168,3 +168,22 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [f0d87c3](https://github.com/YuriiMotov/FastAPI_study/compare/fdca37094623f85dfc642922527f3e09e1bac7a6...f0d87c3ef0b8a7d5362a64633a030fb45825b5fb)
 
+
+### Lesson 10 (testing with PyTest)
+
+[Watch original lesson on Youtube](https://youtu.be/4xJGQKfN3ZM?si=AxZQ6V4xIRBVz6B8)
+
+0. Implementation of changes made in the lesson #10
+
+    Commit: [ff80cfe](https://github.com/YuriiMotov/FastAPI_study/compare/e4dc2c08233a945f09ed77e39b452069ee4e2edd...ff80cfe8438c9aaffa3440f603aa48aeeb5f99bb)
+
+1. Understanding the neccessety of the `event_loop` fixture.
+
+    As I learned from the `python-asyncio` documentation, we need to override default `event_loop` fixture if we use fixtures with the scope different to `function` wich is the default scope.
+    So, since we use fixtures with `session` scope, we need to override `event_loop` fixture with the same scope (it might be any scope that is equal to or wider than others).
+
+2. Testing endpoints, that use '@cache' decorator.
+
+    Commit: []()
+
+3. Is it possible and beneficial to run asynchronous tests in parallel?
