@@ -16,7 +16,7 @@ router = APIRouter()
 
 # Get operations with specific type
 @router.get("/")
-# @cache(expire=5)
+@cache(expire=5)
 async def get_specific_operations(
     operation_type: str, page: int = 1, session: AsyncSession = Depends(get_async_session)
 ) -> list[OperationRead]:

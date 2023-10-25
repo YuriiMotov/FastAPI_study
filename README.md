@@ -184,6 +184,9 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 2. Testing endpoints, that use '@cache' decorator.
 
+    As `httpx.AsyncClient` doesn't implement the `lifespan` protocol, it doesn't use (evoke) `lifespan` context where `fastapi-cache` is initialized.
+    The solution is to add just one line of code in the `ac` fixture.
+
     Commit: []()
 
 3. Is it possible and beneficial to run asynchronous tests in parallel?
