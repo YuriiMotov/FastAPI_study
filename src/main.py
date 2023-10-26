@@ -1,6 +1,7 @@
 import asyncio
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
@@ -24,6 +25,21 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     title="Trading App",
     lifespan=lifespan
+)
+
+origins = [
+    "https://fastapi.tiangolo.com",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE"],
+    allow_headers=[
+        "Set-Cookie", "Access-Control-Allow-Headers",
+        "Access-Control-Allow-Origin", "Authorization"
+    ],
 )
 
 

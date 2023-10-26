@@ -197,3 +197,12 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [c5abf7b](https://github.com/YuriiMotov/FastAPI_study/compare/6c9e6266888d7c82df567636715995eb8bb59768...c5abf7bba6e662856dfc85113a545bdb14b1fbdd)
 
+
+# Lesson 11 (Linking Frontend and Backend. Cors and Middleware)
+
+[Watch original lesson on Youtube](https://youtu.be/h0eTzi5Geo8?si=htNdLZnxlCcYyINx)
+
+0. Implementation of changes made in the lesson #11
+
+    Commit: []()
+
