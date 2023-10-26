@@ -191,8 +191,9 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 3. Is it possible and beneficial to run asynchronous tests in parallel?
 
-    Yes. We can use `pytest-asyncio-cooperative` plugin to perform it.
+    Yes. We can use `pytest-asyncio-cooperative` plugin to achieve it.
 
     It seems as if it doesn't make sence to run tests in cooperative mode if you have a lot of light (fast) tests. But if your tests require long I/O, it will definitely benefit.
 
-    Commit: []()
+    Commit: [c5abf7b](https://github.com/YuriiMotov/FastAPI_study/compare/6c9e6266888d7c82df567636715995eb8bb59768...c5abf7bba6e662856dfc85113a545bdb14b1fbdd)
+
