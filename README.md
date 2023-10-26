@@ -198,7 +198,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
     Commit: [c5abf7b](https://github.com/YuriiMotov/FastAPI_study/compare/6c9e6266888d7c82df567636715995eb8bb59768...c5abf7bba6e662856dfc85113a545bdb14b1fbdd)
 
 
-# Lesson 11 (Linking Frontend and Backend. Cors and Middleware)
+### Lesson 11 (Linking Frontend and Backend. Cors and Middleware)
 
 [Watch original lesson on Youtube](https://youtu.be/h0eTzi5Geo8?si=htNdLZnxlCcYyINx)
 
@@ -206,3 +206,51 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: []()
 
+1. Checking how it works.
+
+    Since I don't have the Frontend's code that was demonstrated in video, I used browser's console and fetch to check how it works.
+
+    I set origins in `main.py` as: `origins = ["https://fastapi.tiangolo.com"]`, opened `https://fastapi.tiangolo.com` in browser, then opened `inspect` -> `console`.
+
+    Add operation:
+
+        fetch(
+            'http://localhost:8000/operations/',
+            {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({"quantity": "10", "figi": "string", "instrument_type": "BTC", "date": "2023-10-26T08:29:31.139Z", "type": "sell"})
+            }
+        ).then(resp => resp.text()).then(console.log)
+    
+    Get operations:
+
+        fetch(
+        'http://localhost:8000/operations/?operation_type=sell',
+        {
+            method: 'GET'
+        }
+        ).then(resp => resp.text()).then(console.log)
+    
+    Authorization via Bearer:
+
+        fetch(
+        'http://127.0.0.1:8000/auth/bdb/login',
+        {
+            method: 'POST',
+            credentials: "include",
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: "username=EMAIL&password=PWD"
+        }
+        ).then(resp => resp.text()).then(console.log)
+
+        fetch(
+        'http://127.0.0.1:8000/auth/me',
+        {
+            method: 'GET',
+            credentials: "include",
+            headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer TOKEN_RECEIVED_IN_PREVIOUS_STEP' }
+        }
+        ).then(resp => resp.text()).then(console.log)
+
+    I could not check authorization via Cookies.. I'll try again later.
