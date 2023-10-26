@@ -204,7 +204,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 0. Implementation of changes made in the lesson #11
 
-    Commit: []()
+    Commit: [c7aa64d](https://github.com/YuriiMotov/FastAPI_study/compare/9080c4284c3f1e4340d395999bce142bde9ae160...c7aa64dd1cb9578249922b98f2094ee54dd28fbc)
 
 1. Checking how it works.
 
@@ -253,4 +253,4 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
         }
         ).then(resp => resp.text()).then(console.log)
 
-    I could not check authorization via Cookies.. I'll try again later.
+    I could not check authorization via Cookies.. I'll try to figure out later.
