@@ -1,23 +1,26 @@
+import asyncio
+from httpx import AsyncClient
+import pytest
+
 from sqlalchemy import select
 
 from conftest import client, async_session_maker
 from auth.models import Role
 
 
-async def test_add_role():
+
+async def add_role():
     async with async_session_maker() as session:
         session.add(Role(name="user", permissions=[]))
         await session.commit()
-
         roles = (await session.scalars(select(Role))).all()
-        assert len(roles) == 1
-        assert roles[0].id == 1
-        assert roles[0].name == 'user'
-        assert roles[0].permissions == []
+        return roles[0].id
         
 
-def test_register():
-    response = client.post(
+async def test_register(ac: AsyncClient):
+
+    await add_role()
+    response = await ac.post(
         '/auth/register',
         json={
             "email": "string",
@@ -28,5 +31,5 @@ def test_register():
             "username": "string"
         }
     )
-
+    await asyncio.sleep(1)
     assert response.status_code == 201

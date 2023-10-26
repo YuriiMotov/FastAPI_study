@@ -187,6 +187,8 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
     As `httpx.AsyncClient` doesn't implement the `lifespan` protocol, it doesn't use (evoke) `lifespan` context where `fastapi-cache` is initialized.
     The solution is to add just one line of code in the `ac` fixture.
 
-    Commit: []()
+    Commit: [6b10367](https://github.com/YuriiMotov/FastAPI_study/compare/0d5f77ed541631edb78f8e612bf69016807420dc...6b1036760d090aea412855e2c119c58a3880aeff)
 
 3. Is it possible and beneficial to run asynchronous tests in parallel?
+
+    
