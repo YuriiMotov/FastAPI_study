@@ -17,6 +17,7 @@ async def add_role():
         return roles[0].id
         
 
+@pytest.mark.asyncio_cooperative
 async def test_register(ac: AsyncClient):
 
     await add_role()

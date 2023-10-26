@@ -3,6 +3,7 @@ from httpx import AsyncClient
 import pytest
 
 
+@pytest.mark.asyncio_cooperative
 async def test_add_specific_operation(ac: AsyncClient):
     response = await ac.post(
         '/operations/',
@@ -21,6 +22,7 @@ async def test_add_specific_operation(ac: AsyncClient):
     assert json_res["instrument_type"] == "BTC"
 
 
+@pytest.mark.asyncio_cooperative
 async def test_add_specific_operation2(ac: AsyncClient):
     response = await ac.post(
         '/operations/',
@@ -39,6 +41,7 @@ async def test_add_specific_operation2(ac: AsyncClient):
     assert json_res["instrument_type"] == "USD"
 
 
+@pytest.mark.asyncio_cooperative
 async def test_add_specific_operation3(ac: AsyncClient):
     response = await ac.post(
         '/operations/',
@@ -57,6 +60,7 @@ async def test_add_specific_operation3(ac: AsyncClient):
     assert json_res["instrument_type"] == "EUR"
 
 
+@pytest.mark.asyncio_cooperative
 async def test_add_specific_operation4(ac: AsyncClient):
     response = await ac.post(
         '/operations/',
@@ -75,6 +79,7 @@ async def test_add_specific_operation4(ac: AsyncClient):
     assert json_res["instrument_type"] == "SAT"
 
 
+@pytest.mark.asyncio_cooperative
 async def test_add_specific_operation5(ac: AsyncClient):
     response = await ac.post(
         '/operations/',
