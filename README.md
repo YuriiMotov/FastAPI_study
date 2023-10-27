@@ -254,3 +254,11 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
         ).then(resp => resp.text()).then(console.log)
 
     I could not check authorization via Cookies.. I'll try to figure out later.
+
+### Lesson 12 (Linking Frontend and Backend. Cors and Middleware)
+
+[Watch original lesson on Youtube](https://youtu.be/AKLzDJ6XLCc?si=1royCvzG45zaqqWZ)
+
+0. Implementation of changes made in the lesson #12
+
+    Commit: []()

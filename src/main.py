@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
 from redis import asyncio as aioredis
@@ -11,7 +12,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from auth.router import router as router_auth
 from operations.router import router as router_operation
 from tasks.router import router as router_tasks
-
+from pages.router import router as router_pages
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -42,6 +43,7 @@ app.add_middleware(
     ],
 )
 
+app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
 @app.exception_handler(SQLAlchemyError)
 async def database_exception_handler(request: Request, exc: SQLAlchemyError):
@@ -92,4 +94,12 @@ app.include_router(
     router_tasks,
     prefix='/tasks',
     tags=['tasks']
+)
+
+
+# Pages
+app.include_router(
+    router_pages,
+    prefix='/pages',
+    tags=['pages']
 )
