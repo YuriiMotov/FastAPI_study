@@ -11,7 +11,7 @@ from sqlalchemy.pool import NullPool
 from database import get_async_session, Base
 from config import (DB_HOST_TEST, DB_NAME_TEST, DB_PASS_TEST, DB_PORT_TEST,
                         DB_USER_TEST)
-from main import app
+from main import api_app
 
 # DATABASE
 DATABASE_URL_TEST = f"postgresql+psycopg://{DB_USER_TEST}:{DB_PASS_TEST}@{DB_HOST_TEST}:{DB_PORT_TEST}/{DB_NAME_TEST}"
@@ -24,7 +24,7 @@ async def override_get_async_session() -> AsyncGenerator[AsyncSession, None]:
     async with async_session_maker() as session:
         yield session
 
-app.dependency_overrides[get_async_session] = override_get_async_session
+api_app.dependency_overrides[get_async_session] = override_get_async_session
 
 @pytest.fixture(autouse=True, scope='session')
 async def prepare_database():
@@ -42,10 +42,10 @@ def event_loop(request):
     yield loop
     loop.close()
 
-client = TestClient(app)
+client = TestClient(api_app)
 
 @pytest.fixture(scope="session")
 async def ac() -> AsyncGenerator[AsyncClient, None]:
-    async with AsyncClient(app=app, base_url="http://test") as ac:
-        async with app.router.lifespan_context(app):
+    async with AsyncClient(app=api_app, base_url="http://test") as ac:
+        async with api_app.router.lifespan_context(api_app):
             yield ac

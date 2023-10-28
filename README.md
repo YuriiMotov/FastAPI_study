@@ -262,3 +262,16 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 0. Implementation of changes made in the lesson #12
 
     Commit: []()
+
+1. Thoughts about error handling.
+
+    What happens if an exception occurs during request processing?
+
+    This exception will be handled by FastAPI exception handlers that we set. And it will be the same handler for all requests (API calls all webpage requests).
+
+    I want to separate these requests and show html-page for web requests and json for API requests.
+
+    It turned out that you can't set different exception handlers for different routers. After doing some research I decided that the best way to implement that is to run two different ASGI-applications: first (API-server) will include routers for API requests, second (WEB-server) will include routers for WEB requests. And both of them will have their own exception handlers. You can run these servers separately (in two different terminal sessions) or write a script which will run two servers in one event loop.
+
+    Commit: []()
+

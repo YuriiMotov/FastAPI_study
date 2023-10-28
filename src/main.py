@@ -2,7 +2,7 @@ import asyncio
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
@@ -23,7 +23,10 @@ async def lifespan(app: FastAPI):
     # `On shoutdown` actions
 
 
-app = FastAPI(
+##########################################################################################
+# API app
+
+api_app = FastAPI(
     title="Trading App",
     lifespan=lifespan
 )
@@ -32,7 +35,7 @@ origins = [
     "https://fastapi.tiangolo.com",
 ]
 
-app.add_middleware(
+api_app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
@@ -43,9 +46,8 @@ app.add_middleware(
     ],
 )
 
-app.mount("/static", StaticFiles(directory="src/static"), name="static")
 
-@app.exception_handler(SQLAlchemyError)
+@api_app.exception_handler(SQLAlchemyError)
 async def database_exception_handler(request: Request, exc: SQLAlchemyError):
     print(exc)
     # Generate ticket for this problem and notify the admin
@@ -60,7 +62,7 @@ async def database_exception_handler(request: Request, exc: SQLAlchemyError):
     )
 
 
-@app.exception_handler(Exception)
+@api_app.exception_handler(Exception)
 async def unknown_exception_handler(request: Request, exc: Exception):
     print(exc)
     # Generate ticket for this problem and notify the admin
@@ -74,31 +76,50 @@ async def unknown_exception_handler(request: Request, exc: Exception):
         }
     )
 
-
 # Auth
-app.include_router(
+api_app.include_router(
     router_auth,
     prefix='/auth',
     tags=['auth']
 )
 
 # Operations
-app.include_router(
+api_app.include_router(
     router_operation,
     prefix='/operations',
     tags=['operations']
 )
 
 # Tasks
-app.include_router(
+api_app.include_router(
     router_tasks,
     prefix='/tasks',
     tags=['tasks']
 )
 
 
+##########################################################################################
+# Web app
+
+web_app = FastAPI(
+    title="Trading App",
+    lifespan=lifespan
+)
+
+web_app.mount("/static", StaticFiles(directory="src/static"), name="static")
+
+
+@web_app.exception_handler(Exception)
+async def exception_handler(request: Request, exc: Exception):
+    print(exc)
+    return HTMLResponse(
+        status_code=500,
+        content="<center><h1>Error occurred.</h1><h3>Please try later</h3></center>"
+    )
+
+
 # Pages
-app.include_router(
+web_app.include_router(
     router_pages,
     prefix='/pages',
     tags=['pages']
