@@ -106,7 +106,7 @@ web_app = FastAPI(
     lifespan=lifespan
 )
 
-web_app.mount("/static", StaticFiles(directory="src/static"), name="static")
+web_app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 @web_app.exception_handler(Exception)

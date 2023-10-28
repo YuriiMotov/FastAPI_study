@@ -261,7 +261,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 0. Implementation of changes made in the lesson #12
 
-    Commit: []()
+    Commit: [3e96cf7](https://github.com/YuriiMotov/FastAPI_study/compare/8064a11ea006962026c0c5e7940cfae465f9d780...3e96cf71e36696266d79155d2532076550bc5d41)
 
 1. Thoughts about error handling.
 
@@ -273,5 +273,16 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     It turned out that you can't set different exception handlers for different routers. After doing some research I decided that the best way to implement that is to run two different ASGI-applications: first (API-server) will include routers for API requests, second (WEB-server) will include routers for WEB requests. And both of them will have their own exception handlers. You can run these servers separately (in two different terminal sessions) or write a script which will run two servers in one event loop.
 
-    Commit: []()
+    Commit: [f104992](https://github.com/YuriiMotov/FastAPI_study/compare/3e96cf71e36696266d79155d2532076550bc5d41...f1049923b21312cd2316afc41469dbc2aee7f020)
 
+2. Getting rid of `src/` in paths.
+
+    When I tried to integrate lesson's 12 code to my code, it hadn't work before I added `src/` in the begining of static files and templates paths. 
+
+    It happened because I ran code from current project's directory, not from `src` directory. To run code properly you just need to change dirrectory in terminal before you run server.
+
+        cd src
+    
+    Now it works without `src/` in paths.
+
+    Commit: []()

@@ -12,7 +12,7 @@ OPERATIONS_PER_PAGE = 3
 
 router = APIRouter()
 
-templates = Jinja2Templates(directory="src/templates")
+templates = Jinja2Templates(directory="templates")
 
 
 @router.get('/search/{operation_type}')
