@@ -21,7 +21,7 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
 7. [Lesson 11 (Linking Frontend and Backend. Cors and Middleware)](#lesson-11-linking-frontend-and-backend-cors-and-middleware)
 
-8. [Lesson 12 (Linking Frontend and Backend. Cors and Middleware)](#lesson-12-linking-frontend-and-backend-cors-and-middleware)
+8. [Lesson 12 (Jinja templates)](#lesson-12-jinja-templates)
 
 9. [Lesson 13 (Websockets)](#lesson-13-websockets)
 
@@ -275,7 +275,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     I could not check authorization via Cookies.. I'll try to figure out later.
 
-### Lesson 12 (Linking Frontend and Backend. Cors and Middleware)
+### Lesson 12 (Jinja templates)
 
 [Watch original lesson on Youtube](https://youtu.be/AKLzDJ6XLCc?si=1royCvzG45zaqqWZ)
 
