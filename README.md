@@ -5,7 +5,27 @@ Along the way I'm trying to improve the code from the course.
 Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
 
-## Improvements:
+## Table of contents:
+
+1. [Lesson 5 (user registration and authentification with fastapi-users)](#lesson-5-user-registration-and-authentification-with-fastapi-users)
+
+2. [Lesson 6 (routers and project file structure)](#lesson-6-routers-and-project-file-structure)
+
+3. [Lesson 7 (designing a RESTful API)](#lesson-7-designing-a-restful-api)
+
+4. [Lesson 8 (caching with Redis)](#lesson-8-caching-with-redis)
+
+5. [Lesson 9 (background tasks with Celery, Redis and Flower)](#lesson-9-background-tasks-with-celery-redis-and-flower)
+
+6. [Lesson 10 (testing with PyTest)](#lesson-10-testing-with-pytest)
+
+7. [Lesson 11 (Linking Frontend and Backend. Cors and Middleware)](#lesson-11-linking-frontend-and-backend-cors-and-middleware)
+
+8. [Lesson 12 (Linking Frontend and Backend. Cors and Middleware)](#lesson-12-linking-frontend-and-backend-cors-and-middleware)
+
+9. [Lesson 13 (Websockets)](#lesson-13-websockets)
+
+
 
 ### Lesson 5 (user registration and authentification with fastapi-users)
 
@@ -277,12 +297,21 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 2. Getting rid of `src/` in paths.
 
-    When I tried to integrate lesson's 12 code to my code, it hadn't work before I added `src/` in the begining of static files and templates paths. 
+    When I tried to integrate lesson's 12 code to my code, it didn't work until I added `src/` to the beginning of the paths to static files and templates. 
 
     It happened because I ran code from current project's directory, not from `src` directory. To run code properly you just need to change dirrectory in terminal before you run server.
 
         cd src
     
     Now it works without `src/` in paths.
+
+    Commit: [a929c00](https://github.com/YuriiMotov/FastAPI_study/compare/f1049923b21312cd2316afc41469dbc2aee7f020...a929c00dae8dd2ee899896a1161e3c5d6cdbfa85)
+
+
+### Lesson 13 (Websockets)
+
+[Watch original lesson on Youtube](https://youtu.be/uWSdWJEFd0Y?si=lunF-nbLSfOLm5gZ)
+
+0. Implementation of changes made in the lesson #13
 
     Commit: []()
