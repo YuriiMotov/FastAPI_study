@@ -10,6 +10,7 @@ from redis import asyncio as aioredis
 from sqlalchemy.exc import SQLAlchemyError
 
 from auth.router import router as router_auth
+from chat.router import router as router_chat
 from operations.router import router as router_operation
 from tasks.router import router as router_tasks
 from pages.router import router as router_pages
@@ -123,4 +124,12 @@ web_app.include_router(
     router_pages,
     prefix='/pages',
     tags=['pages']
+)
+
+
+# Chat
+web_app.include_router(
+    router_chat,
+    prefix='/chat',
+    tags=['chat']
 )

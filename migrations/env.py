@@ -15,6 +15,7 @@ from database import Base
 # Importing all database models
 from auth import models
 from operations import models
+from chat import models
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

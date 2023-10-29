@@ -24,3 +24,11 @@ async def get_search_page(
         'search.html',
         {"request": request, "operations": operations}
     )
+
+
+@router.get("/chat")
+async def get_chat_page(request: Request):
+    return templates.TemplateResponse(
+        'chat.html',
+        {"request": request}
+    )
