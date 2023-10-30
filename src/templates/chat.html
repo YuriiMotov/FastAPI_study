@@ -12,7 +12,7 @@
 
     <script>
         async function getLastMessages() {
-            const url = 'http://localhost:8000/chat/last-messages'
+            const url = 'http://localhost:8001/chat/last-messages'
             const response = await fetch(url, {
                 method: 'GET'
             })
@@ -22,6 +22,9 @@
         getLastMessages()
             .then(messages => {
                 appendMessage("Last 5 messages:")
+                
+                // ToDo: Check the response status code
+                
                 messages.forEach(msg => {
                     appendMessage(msg.text)
                 })
@@ -38,7 +41,7 @@
 
         let client_id = Date.now()
         document.querySelector("#ws-id").textContent = client_id;
-        let ws = new WebSocket(`ws://localhost:8000/chat/ws/${client_id}`);
+        let ws = new WebSocket(`ws://localhost:8001/chat/ws/${client_id}`);
         ws.onmessage = function (event) {
             appendMessage(event.data)
         };

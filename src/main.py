@@ -33,7 +33,7 @@ api_app = FastAPI(
 )
 
 origins = [
-    "https://fastapi.tiangolo.com",
+    "http://localhost:8000",
 ]
 
 api_app.add_middleware(
@@ -99,6 +99,14 @@ api_app.include_router(
 )
 
 
+# Chat
+api_app.include_router(
+    router_chat,
+    prefix='/chat',
+    tags=['chat']
+)
+
+
 ##########################################################################################
 # Web app
 
@@ -124,12 +132,4 @@ web_app.include_router(
     router_pages,
     prefix='/pages',
     tags=['pages']
-)
-
-
-# Chat
-web_app.include_router(
-    router_chat,
-    prefix='/chat',
-    tags=['chat']
 )

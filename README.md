@@ -326,4 +326,11 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: []()
 
-2. Error handling 
+2. Error handling.
+
+    Now websocket endpoint is running under WEB-server and if this endpoint fails server will answer with HTML-page. That's not correct, because javascript expets json answer.
+
+    We could add TRY..EXCEPT blocks to the endpoints that return JSON. Or we can move these endpoints to the API-server. I've chosen second variant.
+    And after that it's needed to add error handling in JavaScript code, but it's not my job :)
+
+    Commit: []()
