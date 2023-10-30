@@ -315,3 +315,15 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 0. Implementation of changes made in the lesson #13
 
     Commit: []()
+
+1. Some code refinements:
+
+    - Move `ConnectionManager` to separate file, rename it to `ChatManager`
+
+    - I think the "ChatManager" should encapsulate all `chat` logic, let's move all database operations to its methods and pass `session` as a parameter.
+
+    - Getting rid of underscores in URL (it's recomended to use dashes instead)
+
+    Commit: []()
+
+2. Error handling 
