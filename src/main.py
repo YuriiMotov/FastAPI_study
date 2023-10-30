@@ -11,25 +11,28 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from auth.router import router as router_auth
 from chat.router import router as router_chat
+from chat_v2.router import broadcast, router as router_chat_v2
 from operations.router import router as router_operation
 from tasks.router import router as router_tasks
 from pages.router import router as router_pages
-
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # `On startup` actions
-    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
-    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
-    yield
-    # `On shoutdown` actions
 
 
 ##########################################################################################
 # API app
 
+@asynccontextmanager
+async def api_lifespan(app: FastAPI):
+    # `On startup` actions
+    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+    await broadcast.connect()
+    yield
+    # `On shoutdown` actions
+    await broadcast.disconnect()
+
 api_app = FastAPI(
     title="Trading App",
-    lifespan=lifespan
+    lifespan=api_lifespan
 )
 
 origins = [
@@ -106,13 +109,30 @@ api_app.include_router(
     tags=['chat']
 )
 
+# Chat v2
+api_app.include_router(
+    router_chat_v2,
+    prefix='/chat-v2',
+    tags=['chat_v2']
+)
+
+
 
 ##########################################################################################
 # Web app
 
+@asynccontextmanager
+async def web_lifespan(app: FastAPI):
+    # `On startup` actions
+    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
+    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
+    yield
+    # `On shoutdown` actions
+
+
 web_app = FastAPI(
     title="Trading App",
-    lifespan=lifespan
+    lifespan=web_lifespan
 )
 
 web_app.mount("/static", StaticFiles(directory="static"), name="static")

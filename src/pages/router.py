@@ -32,3 +32,11 @@ async def get_chat_page(request: Request):
         'chat.html',
         {"request": request}
     )
+
+
+@router.get("/chat-v2")
+async def get_chat_v2_page(request: Request):
+    return templates.TemplateResponse(
+        'chat_v2.html',
+        {"request": request}
+    )
