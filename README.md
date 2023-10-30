@@ -25,6 +25,8 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
 9. [Lesson 13 (Websockets)](#lesson-13-websockets)
 
+10. [Lesson 14 (How to use Depends)](#lesson-14-how-to-use-depends)
+
 
 
 ### Lesson 5 (user registration and authentification with fastapi-users)
@@ -314,7 +316,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 0. Implementation of changes made in the lesson #13
 
-    Commit: []()
+    Commit: [c098aec](https://github.com/YuriiMotov/FastAPI_study/compare/85bf2af1bfe4409cc3295678c18e32b52d496442...c098aec35daaa944140364de33980f2c3f880e47)
 
 1. Some code refinements:
 
@@ -324,7 +326,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     - Getting rid of underscores in URL (it's recomended to use dashes instead)
 
-    Commit: []()
+    Commit: [f3201b9](https://github.com/YuriiMotov/FastAPI_study/compare/c098aec35daaa944140364de33980f2c3f880e47...f3201b98efa0417c203c328a73c575d6df654971) and fix: [7d4ced6](https://github.com/YuriiMotov/FastAPI_study/compare/f3201b98efa0417c203c328a73c575d6df654971...7d4ced6481cd605786460c79702cbb222348aef9)
 
 2. Error handling.
 
@@ -333,4 +335,26 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
     We could add TRY..EXCEPT blocks to the endpoints that return JSON. Or we can move these endpoints to the API-server. I've chosen second variant.
     And after that it's needed to add error handling in JavaScript code, but it's not my job :)
 
-    Commit: []()
+    Commit: [90e7015](https://github.com/YuriiMotov/FastAPI_study/compare/7d4ced6481cd605786460c79702cbb222348aef9...90e70151cb28cc62d7956ac52f23360f5adfec52)
+
+3. In FastAPI documentation it's recomended to use [encode/broadcaster](https://github.com/encode/broadcaster) for more complex tasks. Let's implement the same functional with this library.
+
+    It turned out that there is a problem: this library doesn't support message history. And it looks like nobody is going to add this support in the near future..
+
+    But it can be useful if you are developing a multiservice application and you need all instances to have a common message queue.
+
+    Commit: [71ed85b](https://github.com/YuriiMotov/FastAPI_study/compare/90e70151cb28cc62d7956ac52f23360f5adfec52...71ed85b9591bf6dc0d7cf12711cb576ba4b65fec)
+
+4. Alternatives of Websockets.
+
+    [nice article](https://ably.com/topic/websocket-alternatives)
+
+
+### Lesson 14 (How to use Depends)
+
+[Watch original lesson on Youtube](https://youtu.be/qvzQWBEBHYw?si=kTCgwshHT0tVxCC_)
+
+0. Implementation of changes made in the lesson #14
+
+
+
