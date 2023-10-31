@@ -16,7 +16,9 @@ async def func_with_yield() -> str:
     print("After yield")
 
 @app.get("/dependancy-with-yield")
-def test_dependancy_with_yield(dependancy: str = Depends(func_with_yield)) -> str:
+def test_dependancy_with_yield(
+    dependancy: Annotated[str, Depends(func_with_yield)]
+) -> str:
     print("Inside the route")
     print(f"{dependancy=}")
     return "Take a look at the console"
@@ -32,7 +34,7 @@ def func_with_params(offset: int = 0, cnt: int = 10) -> dict[str, int]:
 
 @app.get("/dependancy-with-params")
 def test_dependancy_with_params(
-    params: dict[str, int] = Depends(func_with_params)
+    params: Annotated[dict[str, int], Depends(func_with_params)]
 ) -> str:
     return f"{params=}"
 
@@ -40,7 +42,7 @@ def test_dependancy_with_params(
 # You can define how to pass these parameters
 @app.get("/dependancy-with-params-in-path/{offset}/{cnt}")
 def test_dependancy_with_params(
-    params: dict[str, int] = Depends(func_with_params)
+    params: Annotated[dict[str, int], Depends(func_with_params)]
 ) -> str:
     return f"{params=}"
 
@@ -59,7 +61,7 @@ class Params():
 
 @app.get("/dependancy-with-params-class")
 def test_dependancy_with_params_class(
-    params: Params = Depends(Params)
+    params: Annotated[Params, Depends(Params)]
 ) -> str:
     return f"{params=}"
 
@@ -84,7 +86,7 @@ class AuthGuard():
 auth_guard_payments = AuthGuard("Payments")
 
 @app.get("/payments")
-def get_payments(authorized: bool = Depends(auth_guard_payments)) -> str:
+def get_payments(authorized: Annotated[bool, Depends(auth_guard_payments)]) -> str:
     return "Payments information"
 
 
