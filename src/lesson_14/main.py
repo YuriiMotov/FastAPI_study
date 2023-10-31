@@ -8,6 +8,7 @@ from database import AsyncSession, get_async_session
 from .auth import get_current_active_user
 from . import auth
 from . import schemas
+from .orders_test import orders_router
 
 app = FastAPI()
 
@@ -153,4 +154,14 @@ app.include_router(
     oauth2_router,
     prefix="/oauth2-tests",
     tags=["oauth2"]
+)
+
+
+##########################################################################################
+# Dependancies call order
+
+app.include_router(
+    orders_router,
+    prefix="/orders-tests",
+    tags=["orders-test"]
 )

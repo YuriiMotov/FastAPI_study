@@ -365,3 +365,19 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 2. Let's make oauth2 example more secure by following the FastAPI documentation
 
     Commit: [5003291](https://github.com/YuriiMotov/FastAPI_study/compare/00734e4a31f213a5c51e07dc4b407830014236c8...50032916b0784e6f14a660f59be7f15606db7b2f)
+
+3. Figuring out the order of the dependancies execution order.
+
+    When somebody call the endpoint which has dependancies, FastAPI builds the tree of dependancies and call them in right order. Results are cached, so if you have several instances of one dependancy, it will be called once (see the `operation-with-dependancies-1` endpoint).
+
+    Dependancies with `yield` are executed till the `yield`.
+
+    After that the endpoint function is executed.
+
+    If any exception occures during this process (till the moment then Response is sent), this exception will be passed to the dependancies with `yield`. You can catch it and raise other exception, including HTTPException, with changes HTTP-Response.
+
+    After the endpoint's function has executed successfully and Response has sent to the client, background task starts.
+
+    If any exception occures during the background task execution, this exception will be passed to the dependancies with `yield`. You can catch it and do whatever you want except raising HTTPException (it doesn't make sence since the Respons has sent).
+
+    Commit: []()
