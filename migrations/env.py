@@ -14,6 +14,7 @@ from database import Base
 
 # Importing all database models
 from auth import models
+from lesson_14 import models
 from operations import models
 from chat import models
 

@@ -21,3 +21,5 @@ SMTP_USER = os.environ.get("SMTP_USER")
 
 SECRET_AUTH_COOKIE = os.environ.get("SECRET_AUTH_COOKIE")
 SECRET_AUTH_USER_MANAGER = os.environ.get("SECRET_AUTH_USER_MANAGER")
+
+OAUTH2_SECRET = os.environ.get("OAUTH2_SECRET")

@@ -2,8 +2,12 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, FastAPI, Request, status
 from fastapi.exceptions import HTTPException
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from pydantic import BaseModel
+from fastapi.security import OAuth2PasswordRequestForm
+
+from database import AsyncSession, get_async_session
+from .auth import get_current_active_user
+from . import auth
+from . import schemas
 
 app = FastAPI()
 
@@ -117,95 +121,31 @@ app.include_router(
 ##########################################################################################
 # Authorization via OAuth2 Bearter and Password
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="oauth2-tests/token")
-
 oauth2_router = APIRouter()
 
-fake_users_db = {
-    "johndoe": {
-        "username": "johndoe",
-        "full_name": "John Doe",
-        "email": "johndoe@example.com",
-        "hashed_password": "fakehashedsecret",
-        "disabled": False,
-    },
-    "alice": {
-        "username": "alice",
-        "full_name": "Alice Wonderson",
-        "email": "alice@example.com",
-        "hashed_password": "fakehashedsecret2",
-        "disabled": True,
-    },
-}
 
-
-class User(BaseModel):
-    username: str
-    email: str | None = None
-    full_name: str | None = None
-    disabled: bool | None = None
-
-
-class UserInDB(User):
-    hashed_password: str
-
-
-def get_user(db, username: str):
-    if username in db:
-        user_dict = db[username]
-        return UserInDB(**user_dict)
-
-
-def fake_decode_token(token: str):
-    # This doesn't provide any security at all
-    # Check the next version
-    user = get_user(fake_users_db, token)
-    return user
-
-
-def fake_hash_password(password: str):
-    return "fakehashed" + password
-
-
-async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
-    user = fake_decode_token(token)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Invalid authentication credentials",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    return user
-
-
-async def get_current_active_user(
-    current_user: Annotated[User, Depends(get_current_user)]
+@oauth2_router.post("/token", response_model=schemas.Token)
+async def login_for_access_token(
+    session: Annotated[AsyncSession, Depends(get_async_session)],
+    form_data: OAuth2PasswordRequestForm = Depends()
 ):
-    if current_user.disabled:
-        raise HTTPException(status_code=400, detail="Inactive user")
-    return current_user
+    token = await auth.login(session=session, form_data=form_data)
+    return token
 
 
-@oauth2_router.get("/items/")
-async def read_items(token: Annotated[str, Depends(oauth2_scheme)]):
-    return {"token": token}
+@oauth2_router.post("/register", response_model=schemas.User)
+async def register_user(
+    session: Annotated[AsyncSession, Depends(get_async_session)],
+    user_data: schemas.UserCreate
+):
+    user = await auth.create_user(session=session, user_data=user_data)
+    return user
 
 
-@oauth2_router.post("/token")
-async def login(form_data: Annotated[OAuth2PasswordRequestForm, Depends()]):
-    user_dict = fake_users_db.get(form_data.username)
-    if not user_dict:
-        raise HTTPException(status_code=400, detail="Incorrect username or password")
-    user = UserInDB(**user_dict)
-    hashed_password = fake_hash_password(form_data.password)
-    if not hashed_password == user.hashed_password:
-        raise HTTPException(status_code=400, detail="Incorrect username or password")
-
-    return {"access_token": user.username, "token_type": "bearer"}
-
-
-@oauth2_router.get("/users/me")
-async def get_users_me(current_user: Annotated[User, Depends(get_current_active_user)]):
+@oauth2_router.get("/users/me", response_model=schemas.User)
+async def get_users_me(
+    current_user: Annotated[schemas.User, Depends(get_current_active_user)]
+):
     return current_user
 
 
