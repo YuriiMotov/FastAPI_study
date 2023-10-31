@@ -366,7 +366,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [5003291](https://github.com/YuriiMotov/FastAPI_study/compare/00734e4a31f213a5c51e07dc4b407830014236c8...50032916b0784e6f14a660f59be7f15606db7b2f)
 
-3. Figuring out the order of the dependencies execution order.
+3. Figuring out the dependencies execution order.
 
     When somebody call the endpoint which has dependencies, FastAPI builds the tree of dependencies and call them in right order. Results are cached, so if you have several instances of one dependancy, it will be called once (see the `operation-with-dependencies-1` endpoint).
 
