@@ -356,5 +356,12 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 0. Implementation of changes made in the lesson #14
 
+    Commit: [f4b6d11](https://github.com/YuriiMotov/FastAPI_study/compare/a148a155d0f3d865fca23e5f7769c0b3fb318c56...f4b6d111fdbea557c37b20fe880f31f4208958e9)
 
+1. It's recommended in the FastAPI documentation to use `Annotated` instead of passing `Depends` as a default attribute value.
 
+    Commit: [00734e4](https://github.com/YuriiMotov/FastAPI_study/compare/f4b6d111fdbea557c37b20fe880f31f4208958e9...00734e4a31f213a5c51e07dc4b407830014236c8)
+
+2. Let's make oauth2 example more secure by following the FastAPI documentation
+
+    Commit: [5003291](https://github.com/YuriiMotov/FastAPI_study/compare/00734e4a31f213a5c51e07dc4b407830014236c8...50032916b0784e6f14a660f59be7f15606db7b2f)
