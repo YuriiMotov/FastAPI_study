@@ -3,13 +3,17 @@ from time import sleep
 from celery import Celery
 from kombu import Exchange, Queue
 
+from config import REDIS_HOST, REDIS_PORT
+
 
 default_exchange = Exchange('default', type='direct')
 hight_priority_exchange = Exchange('hight_priority', type='direct')
 
 
 celery = Celery(
-    'tasks', broker='redis://localhost:6379', backend='redis://localhost:6379',
+    'tasks',
+    broker=f'redis://{REDIS_HOST}:{REDIS_PORT}',
+    backend=f'redis://{REDIS_HOST}:{REDIS_PORT}',
     result_extended=True,
     task_queues=(
         Queue('default', default_exchange, routing_key='default'),

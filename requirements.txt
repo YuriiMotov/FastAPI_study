@@ -1,9 +1,12 @@
 alembic
+broadcaster[redis]
 celery
+gunicorn
 fastapi[all]
-fastapi-cache[redis]
+fastapi-cache2[redis]
 fastapi-users[sqlalchemy]
 flower
+python-jose[cryptography]
 psycopg[binary]
 python-dotenv
 setuptools

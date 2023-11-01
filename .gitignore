@@ -3,3 +3,4 @@ __pycache__
 *.egg-info
 src/fastapi_course.egg-info/PKG-INFO
 *.db
+.env-prod

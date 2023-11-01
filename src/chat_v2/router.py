@@ -3,9 +3,11 @@ import anyio
 from broadcaster import Broadcast
 from fastapi import APIRouter, WebSocket
 
+from config import REDIS_HOST, REDIS_PORT
+
 
 router = APIRouter()
-broadcast = Broadcast("redis://localhost:6379")
+broadcast = Broadcast(f"redis://{REDIS_HOST}:{REDIS_PORT}")
 
 
 @router.websocket('/chatroom-ws')

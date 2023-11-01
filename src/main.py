@@ -12,6 +12,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from auth.router import router as router_auth
 from chat.router import router as router_chat
 from chat_v2.router import broadcast, router as router_chat_v2
+from config import REDIS_HOST, REDIS_PORT
 from operations.router import router as router_operation
 from tasks.router import router as router_tasks
 from pages.router import router as router_pages
@@ -23,7 +24,9 @@ from pages.router import router as router_pages
 @asynccontextmanager
 async def api_lifespan(app: FastAPI):
     # `On startup` actions
-    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
+    redis = aioredis.from_url(
+        f"redis://{REDIS_HOST}:{REDIS_PORT}", encoding="utf8", decode_responses=True
+    )
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
     await broadcast.connect()
     yield
@@ -124,7 +127,9 @@ api_app.include_router(
 @asynccontextmanager
 async def web_lifespan(app: FastAPI):
     # `On startup` actions
-    redis = aioredis.from_url("redis://localhost", encoding="utf8", decode_responses=True)
+    redis = aioredis.from_url(
+        f"redis://{REDIS_HOST}:{REDIS_PORT}", encoding="utf8", decode_responses=True
+    )
     FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
     yield
     # `On shoutdown` actions
