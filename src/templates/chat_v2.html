@@ -27,7 +27,7 @@
         
             function join(name) {
             var host = window.location.host.split(':')[0];
-            var ws = new WebSocket("ws://localhost:8001/chat-v2/chatroom-ws");
+            var ws = new WebSocket("ws://{{ API_SRV_HOST_PORT }}/chat-v2/chatroom-ws");
         
             var container = $('div#msgs');
             ws.onmessage = function(evt) {
@@ -188,6 +188,10 @@
         </div>
         <div id="msgs">
         <ul>
+            <li class="message" style="display: none">
+            <span class="user"></span><span class="message"></span>
+            </li>
+
             {% for msg in messages %}
             <li class="message" style="display: none">
             <span class="user">{{ msg.user }}</span><span class="message">{{ msg.text }}</span>

@@ -11,6 +11,10 @@ DB_PASS = os.environ.get("DB_PASS")
 
 REDIS_HOST=os.environ.get("REDIS_HOST")
 REDIS_PORT=os.environ.get("REDIS_PORT")
+WEB_APP_HOST=os.environ.get("WEB_APP_HOST")
+WEB_APP_PORT=os.environ.get("WEB_APP_PORT")
+API_APP_HOST=os.environ.get("API_APP_HOST")
+API_APP_PORT=os.environ.get("API_APP_PORT")
 
 DB_HOST_TEST = os.environ.get("DB_HOST_TEST")
 DB_PORT_TEST = os.environ.get("DB_PORT_TEST")

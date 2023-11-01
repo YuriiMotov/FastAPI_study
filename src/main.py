@@ -12,7 +12,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from auth.router import router as router_auth
 from chat.router import router as router_chat
 from chat_v2.router import broadcast, router as router_chat_v2
-from config import REDIS_HOST, REDIS_PORT
+from config import REDIS_HOST, REDIS_PORT, WEB_APP_HOST, WEB_APP_PORT
 from operations.router import router as router_operation
 from tasks.router import router as router_tasks
 from pages.router import router as router_pages
@@ -39,7 +39,8 @@ api_app = FastAPI(
 )
 
 origins = [
-    "http://localhost:8000",
+    f"http://{WEB_APP_HOST}:{WEB_APP_PORT}",
+    f"https://{WEB_APP_HOST}:{WEB_APP_PORT}",
 ]
 
 api_app.add_middleware(

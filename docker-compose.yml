@@ -18,18 +18,30 @@ services:
     expose:
       - 5370
 
-  app:
+  api_app:
     build:
       context: .
     env_file:
       - .env-prod
-    container_name: fastapi_app
-    command: ["/fastapi_app/docker/app.sh"]
+    container_name: fastapi_api_app
+    command: ["/fastapi_app/docker/api_app.sh"]
     ports:
       - 9999:8000
     depends_on:
       - db
       - redis
+
+  web_app:
+    build:
+      context: .
+    env_file:
+      - .env-prod
+    container_name: fastapi_web_app
+    command: ["/fastapi_app/docker/web_app.sh"]
+    ports:
+      - 9998:8000
+    depends_on:
+      - api_app
 
   celery:
     build:
