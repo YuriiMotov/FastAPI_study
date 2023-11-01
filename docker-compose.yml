@@ -3,6 +3,8 @@ services:
   db:
     image: postgres:15
     container_name: db_app
+    volumes:
+      - db-data:/var/lib/postgresql/data
     command: -p 1221
     expose:
       - 1221
@@ -51,3 +53,7 @@ services:
       - celery
     ports:
       - 8888:5555
+  
+volumes:
+  db-data:
+      name: ${DATABASE_VOLUME}
