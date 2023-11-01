@@ -391,3 +391,18 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: []()
 
+1. User registration via `fastapi-users` doesn't work for now, because there are no any roles in DB yet.
+
+    Let's add script wich will insert initial data into DB.
+
+    Commit: []()
+
+2. Now all the data is stored in the container and will be deleted if you delete the container. Let's add `volume`
+
+    Commit: []()
+
+3. This version of docker-compose file runs only api-server. But we need to run web-server too.
+
+    Commit: []()
+
+
