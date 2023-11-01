@@ -27,6 +27,7 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
 10. [Lesson 14 (How to use Depends)](#lesson-14-how-to-use-depends)
 
+11. [Lesson 15 (Docker and Docker Compose)](lesson-15-docker-and-docker-compose))
 
 
 ### Lesson 5 (user registration and authentification with fastapi-users)
@@ -383,26 +384,28 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
     Commit: [f805aea](https://github.com/YuriiMotov/FastAPI_study/compare/319e75f9282cf1a655f9b37d8ca25c9a5afc3b1c...f805aeaa8239277d1055d76e223661a69b4f0cbf)
 
 
-### Lesson 15 (Docker и Docker Compose)
+### Lesson 15 (Docker and Docker Compose)
 
 [Watch original lesson on Youtube](https://youtu.be/_1H1qsNqxwM?si=EqLN4IzGoua13r98)
 
 0. Implementation of changes made in the lesson #15
 
-    Commit: []()
+    Commit: [0b1edeb](https://github.com/YuriiMotov/FastAPI_study/compare/ebe585423ab19a8a452547cf476cf5b3a88488f8...0b1edeb486866ff644eacf2522a8a6585376c9ae)
 
 1. User registration via `fastapi-users` doesn't work for now, because there are no any roles in DB yet.
 
     Let's add script wich will insert initial data into DB.
 
-    Commit: []()
+    Commit: [b1401a2](https://github.com/YuriiMotov/FastAPI_study/compare/0b1edeb486866ff644eacf2522a8a6585376c9ae...b1401a2a719f82c5f7665ef014e30c73b6bb3b55)
 
-2. Now all the data is stored in the container and will be deleted if you delete the container. Let's add `volume`
+2. At the moment, all the data is stored in the container and will be deleted if you delete the container. Let's add `volume` to make DB data persistent.
 
-    Commit: []()
+    Now DB data is stored separately from container in `/var/lib/docker/volumes` and won't be deleted if you delete container.
+
+    Commit: [4ee7e29](https://github.com/YuriiMotov/FastAPI_study/compare/b1401a2a719f82c5f7665ef014e30c73b6bb3b55...4ee7e290c152a0e27115006267bca98401ed2fd8)
 
 3. This version of docker-compose file runs only api-server. But we need to run web-server too.
 
-    Commit: []()
+    Commit: [595ac10](https://github.com/YuriiMotov/FastAPI_study/compare/4ee7e290c152a0e27115006267bca98401ed2fd8...595ac10443fc9c34dd55f1e18e722253dc69ce4e)
 
 
