@@ -14,4 +14,6 @@ RUN alembic upgrade head
 
 WORKDIR /fastapi_app/src
 
+RUN python init_db.py
+
 CMD gunicorn main:api_app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000
