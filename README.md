@@ -27,9 +27,9 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
 10. [Lesson 14 (How to use Depends)](#lesson-14-how-to-use-depends)
 
-11. [Lesson 15 (Docker and Docker Compose)](lesson-15-docker-and-docker-compose))
+11. [Lesson 15 (Docker and Docker Compose)](#lesson-15-docker-and-docker-compose))
 
-12. [Lesson 16 (Software deployment on render.com)](lesson-16-software-deployment-on-render-com))
+12. [Lesson 16 (Software deployment on render.com)](#lesson-16-software-deployment-on-rendercom)
 
 
 
