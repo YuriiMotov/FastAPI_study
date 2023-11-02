@@ -29,6 +29,9 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
 11. [Lesson 15 (Docker and Docker Compose)](lesson-15-docker-and-docker-compose))
 
+12. [Lesson 16 (Software deployment on render.com)](lesson-16-software-deployment-on-render-com))
+
+
 
 ### Lesson 5 (user registration and authentification with fastapi-users)
 
@@ -408,4 +411,30 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [595ac10](https://github.com/YuriiMotov/FastAPI_study/compare/4ee7e290c152a0e27115006267bca98401ed2fd8...595ac10443fc9c34dd55f1e18e722253dc69ce4e)
 
+
+### Lesson 16 (Software deployment on render.com)
+
+[Watch original lesson on Youtube](https://youtu.be/OxE2UGHPOA0?si=W80lkOnWJerZCX_2)
+
+0. Implementation of changes made in the lesson #16
+
+    Commits: [79d4a9d](https://github.com/YuriiMotov/FastAPI_study/compare/daa8cf877d5ba2658b86c1fb19a3bc7c7d337cf1...79d4a9d94202c87dd6936f4d052c593ec610ff98) and [cfd6b0a](https://github.com/YuriiMotov/FastAPI_study/compare/79d4a9d94202c87dd6936f4d052c593ec610ff98...cfd6b0ace816c81f8ae2e9278083fcb137375b88)
+
+1. It's not good that we had to override Dockerfile to deploy our app on render.com. By doing that our docker-compose solution was broken.
+
+    Render.com allows to specify the directory where it will look for Dockerfile.
+
+    Just copy Dockerfile to `docker/render_com/` in the github-repository and change in the web-app settings on render.com `Dockerfile Path` from `./Dockerfile` to `./docker/render_com/Dockerfile`. Then trigger the deployment hook.
+
+    Revert changes of `Dockerfile` placed in the root directory of the repository to make `docker-compose` solution work again.
+
+    Commit: []()
+
+2. Let's also run our web-server.
+
+    To do that just create one more app with the same configuration as first web-app (api-server). And set in it's settings `Docker Command`: `gunicorn main:web_app --workers 1 --worker-class uvicorn.workers.UvicornWorker --bind=0.0.0.0:8000`.
+
+    And I had to make some changes in source codes to use right protocols, hosts and ports.
+
+    Commit: [c186719](https://github.com/YuriiMotov/FastAPI_study/compare/b40b72b7484f2dc6fed4e6134ff659e7140eb1de...c186719cb6f6d56d2ecba54a4f2f0be018bcc203)
 
