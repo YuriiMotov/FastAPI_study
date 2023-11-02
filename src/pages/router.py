@@ -4,7 +4,7 @@ from fastapi_cache.decorator import cache
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from config import API_APP_HOST, API_APP_PORT
+from config import API_APP_HOST, API_APP_PORT, HTTP_HTTPS_PROT
 from database import get_async_session
 from operations.router import get_specific_operations
 from schemas import ErrorDetails
@@ -32,7 +32,11 @@ async def get_chat_page(request: Request):
     api_srv_host_port = f"{API_APP_HOST}:{API_APP_PORT}"
     return templates.TemplateResponse(
         'chat.html',
-        {"request": request, "API_SRV_HOST_PORT": api_srv_host_port}
+        {
+            "request": request,
+            "API_SRV_HOST_PORT": api_srv_host_port,
+            "HTTP_HTTPS_PROT": HTTP_HTTPS_PROT
+        }
     )
 
 
