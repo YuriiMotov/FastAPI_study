@@ -12,7 +12,7 @@
 
     <script>
         async function getLastMessages() {
-            const url = '{{ HTTP_HTTPS_PROT }}://{{ API_SRV_HOST_PORT }}/chat/last-messages'
+            const url = 'http://{{ API_SRV_HOST_PORT }}/chat/last-messages'
             const response = await fetch(url, {
                 method: 'GET'
             })
