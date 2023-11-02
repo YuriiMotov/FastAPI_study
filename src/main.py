@@ -39,6 +39,7 @@ api_app = FastAPI(
 )
 
 origins = [
+    "https://fastapi-course-web.onrender.com",
     f"http://{WEB_APP_HOST}:{WEB_APP_PORT}",
     f"https://{WEB_APP_HOST}:{WEB_APP_PORT}",
 ]
