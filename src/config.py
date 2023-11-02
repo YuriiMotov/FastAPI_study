@@ -15,6 +15,8 @@ WEB_APP_HOST=os.environ.get("WEB_APP_HOST")
 WEB_APP_PORT=os.environ.get("WEB_APP_PORT")
 API_APP_HOST=os.environ.get("API_APP_HOST")
 API_APP_PORT=os.environ.get("API_APP_PORT")
+HTTP_HTTPS_PROT=os.environ.get("HTTP_HTTPS_PROT", default='http')
+WS_WSS_PROT=os.environ.get("WS_WSS_PROT", default='ws')
 
 DB_HOST_TEST = os.environ.get("DB_HOST_TEST")
 DB_PORT_TEST = os.environ.get("DB_PORT_TEST")

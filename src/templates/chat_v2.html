@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js'></script>
     <script>
         $(document).ready(function(){
             if (typeof WebSocket != 'undefined') {
@@ -27,7 +27,7 @@
         
             function join(name) {
             var host = window.location.host.split(':')[0];
-            var ws = new WebSocket("ws://{{ API_SRV_HOST_PORT }}/chat-v2/chatroom-ws");
+            var ws = new WebSocket("{{ WS_WSS_PROT }}://{{ API_SRV_HOST_PORT }}/chat-v2/chatroom-ws");
         
             var container = $('div#msgs');
             ws.onmessage = function(evt) {
