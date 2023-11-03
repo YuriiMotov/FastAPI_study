@@ -428,7 +428,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Revert changes of `Dockerfile` placed in the root directory of the repository to make `docker-compose` solution work again.
 
-    Commit: []()
+    Commit: [662899b](https://github.com/YuriiMotov/FastAPI_study/compare/cfd6b0ace816c81f8ae2e9278083fcb137375b88...662899b12008e182361c935b41151addfbb1a74b)
 
 2. Let's also run our web-server.
 
