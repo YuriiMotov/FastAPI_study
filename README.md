@@ -438,3 +438,11 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [c186719](https://github.com/YuriiMotov/FastAPI_study/compare/b40b72b7484f2dc6fed4e6134ff659e7140eb1de...c186719cb6f6d56d2ecba54a4f2f0be018bcc203)
 
+
+### Layered architecture style
+
+[Watch original lesson on Youtube](https://youtu.be/8Im74b55vFc?si=chm6CGhxGADsc_uh)
+
+0. Implementation of changes made in the video
+
+    Commit: []()
