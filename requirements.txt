@@ -1,4 +1,6 @@
 alembic
 fastapi[all]
 psycopg[binary]
+pytest
+pytest-asyncio
 sqlalchemy
