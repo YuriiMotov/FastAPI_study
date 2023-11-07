@@ -1,0 +1,4 @@
+alembic
+fastapi[all]
+psycopg[binary]
+sqlalchemy
