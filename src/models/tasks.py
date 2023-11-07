@@ -5,13 +5,13 @@ from db.database import Base
 from schemas.tasks import TaskSchema
 
 
-class Tasks(Base):
-    __tablename__ = "tasks"
+class Task(Base):
+    __tablename__ = "task"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     title: Mapped[str]
-    author_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
-    assignee_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    author_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
+    assignee_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
 
     def to_read_model(self) -> TaskSchema:
         return TaskSchema(

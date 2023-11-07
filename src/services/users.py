@@ -4,7 +4,7 @@ from utils.repository import AbstractRepository
 
 class UsersService:
     def __init__(self, users_repo: AbstractRepository):
-        self.users_repo: AbstractRepository = users_repo()
+        self.users_repo: AbstractRepository = users_repo
 
     async def add_user(self, user: UserSchemaAdd):
         user_id = await self.users_repo.add_one(user.model_dump())

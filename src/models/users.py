@@ -4,8 +4,8 @@ from db.database import Base
 from schemas.users import UserSchema
 
 
-class Users(Base):
-    __tablename__ = "users"
+class User(Base):
+    __tablename__ = "user"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str]

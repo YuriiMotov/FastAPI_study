@@ -5,8 +5,8 @@ from services.users import UsersService
 
 
 def tasks_service():
-    return TasksService(TasksRepository)
+    return TasksService(TasksRepository())
 
 
 def users_service():
-    return UsersService(UsersRepository)
+    return UsersService(UsersRepository())
