@@ -34,24 +34,3 @@ class SQLAlchemyRepository(AbstractRepository):
             res = [row[0].to_read_model() for row in res.all()]
             return res
 
-
-class InMemoryRepository(AbstractRepository):
-    model = None
-    last_id: int = 0
-    items_list: list = []
-
-    def __init__(self):
-        super().__init__()
-
-    async def add_one(self, data: dict) -> int:
-        cls = InMemoryRepository
-        cls.last_id += 1
-        new_item = self.model(**data)
-        new_item.id = cls.last_id
-        cls.items_list.append(new_item)
-        return cls.last_id
-    
-    async def find_all(self):
-        cls = InMemoryRepository
-        return [item.to_read_model() for item in cls.items_list]
-
