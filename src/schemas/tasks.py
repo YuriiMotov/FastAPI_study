@@ -17,7 +17,6 @@ class TaskSchemaAdd(BaseModel):
 
 
 class TaskSchemaEdit(BaseModel):
-    author_id: int
     assignee_id: int
 
 
