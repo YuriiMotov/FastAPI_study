@@ -1,8 +1,7 @@
 from fastapi import APIRouter
 
-from api.dependencies import UOWDep
+from api.dependencies import TasksServiceDep
 from schemas.tasks import TaskSchemaAdd, TaskSchemaEdit
-from services.tasks import TasksService
 
 router = APIRouter(
     prefix="/tasks",
@@ -13,17 +12,17 @@ router = APIRouter(
 @router.post("")
 async def add_task(
     task: TaskSchemaAdd,
-    uow: UOWDep,
+    tasks_service: TasksServiceDep,
 ):
-    task_id = await TasksService().add_task(uow, task)
+    task_id = await tasks_service.add_task(task)
     return {"task_id": task_id}
 
 
 @router.get("")
 async def get_tasks(
-    uow: UOWDep,
+    tasks_service: TasksServiceDep,
 ):
-    tasks = await TasksService().get_tasks(uow)
+    tasks = await tasks_service.get_tasks()
     return tasks
 
 
@@ -31,15 +30,15 @@ async def get_tasks(
 async def edit_task(
     task_id: int,
     task: TaskSchemaEdit,
-    uow: UOWDep,
+    tasks_service: TasksServiceDep,
 ):
-    edited_task = await TasksService().edit_task(uow, task_id, task)
+    edited_task = await tasks_service.edit_task(task_id, task)
     return edited_task
 
 
 @router.get("/history")
 async def  get_task_history(
-    uow: UOWDep
+    tasks_service: TasksServiceDep,
 ):
-    task_history = await TasksService().get_task_history(uow)
+    task_history = await tasks_service.get_task_history()
     return task_history

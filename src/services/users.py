@@ -4,13 +4,16 @@ from utils.unitofwork import IUnitOfWork
 
 class UsersService:
 
-    async def add_user(self, uow: IUnitOfWork, user: UserSchemaAdd):
-        async with uow:
-            user_id = await uow.users.add_one(user.model_dump())
-            await uow.commit()
+    def __init__(self, uow: IUnitOfWork):
+        self.uow = uow
+
+    async def add_user(self, user: UserSchemaAdd):
+        async with self.uow:
+            user_id = await self.uow.users.add_one(user.model_dump())
+            await self.uow.commit()
             return user_id
 
-    async def get_users(self, uow: IUnitOfWork):
-        async with uow:
-            users = await uow.users.find_all()
+    async def get_users(self):
+        async with self.uow:
+            users = await self.uow.users.find_all()
             return users

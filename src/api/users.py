@@ -1,8 +1,7 @@
 from fastapi import APIRouter
 
-from api.dependencies import UOWDep
+from api.dependencies import UsersServiceDep
 from schemas.users import UserSchemaAdd
-from services.users import UsersService
 
 
 router = APIRouter(
@@ -14,15 +13,15 @@ router = APIRouter(
 @router.post("")
 async def add_user(
     user: UserSchemaAdd,
-    uow: UOWDep
+    users_service: UsersServiceDep
 ):
-    user_id = await UsersService().add_user(uow, user)
+    user_id = await users_service.add_user(user)
     return {"user_id": user_id}
 
 
 @router.get("")
 async def get_users(
-    uow: UOWDep
+    users_service: UsersServiceDep
 ):
-    users = await UsersService().get_users(uow)
+    users = await users_service.get_users()
     return users
