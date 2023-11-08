@@ -1,14 +1,16 @@
 from pydantic import BaseModel, ConfigDict
 
 
-class UserSchema(BaseModel):
+class UserSchemaBase(BaseModel):
+    name: str
+
+class UserSchema(UserSchemaBase):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
-    name: str
 
 
-class UserSchemaAdd(BaseModel):
-    name: str
+class UserSchemaAdd(UserSchemaBase):
+    pass
 
     

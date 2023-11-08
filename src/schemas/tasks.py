@@ -1,35 +1,37 @@
 from pydantic import BaseModel, ConfigDict
 
 
-class TaskSchema(BaseModel):
+class TaskSchemaBase(BaseModel):
+    title: str
+    author_id: int
+    assignee_id: int
+
+
+class TaskSchema(TaskSchemaBase):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
-    title: str
-    author_id: int
-    assignee_id: int
 
 
-class TaskSchemaAdd(BaseModel):
-    title: str
-    author_id: int
-    assignee_id: int
+class TaskSchemaAdd(TaskSchemaBase):
+    pass
 
 
 class TaskSchemaEdit(BaseModel):
     assignee_id: int
 
 
-class TaskHistorySchema(BaseModel):
+
+class TaskHistorySchemaBase(BaseModel):
+    task_id: int
+    previous_assignee_id: int
+    new_assignee_id: int
+
+
+class TaskHistorySchema(TaskHistorySchemaBase):
     model_config = ConfigDict(from_attributes=True)
     
     id: int
-    task_id: int
-    previous_assignee_id: int
-    new_assignee_id: int
 
-
-class TaskHistorySchemaAdd(BaseModel):
-    task_id: int
-    previous_assignee_id: int
-    new_assignee_id: int
+class TaskHistorySchemaAdd(TaskHistorySchemaBase):
+    pass
