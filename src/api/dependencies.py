@@ -2,7 +2,7 @@ from typing import Annotated
 
 from fastapi import Depends
 
-from utils.unitofwork import UnitOfWork
+from utils.unitofwork import SQLAUnitOfWork
 
 
-UOWDep = Annotated[UnitOfWork, Depends(UnitOfWork)]
+UOWDep = Annotated[SQLAUnitOfWork, Depends(SQLAUnitOfWork)]

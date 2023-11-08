@@ -2,5 +2,5 @@ from models.tasks import Task
 from utils.repository import SQLAlchemyRepository
 
 
-class TasksRepository(SQLAlchemyRepository):
+class SQLATasksRepository(SQLAlchemyRepository):
     model = Task

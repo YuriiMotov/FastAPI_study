@@ -1,15 +1,16 @@
 from abc import ABC, abstractmethod
 
 from db.database import async_session_maker
-from repositories.tasks import TasksRepository
-from repositories.task_history import TaskHistoryRepository
-from repositories.users import UsersRepository
+from repositories.tasks import SQLATasksRepository
+from repositories.task_history import SQLATaskHistoryRepository
+from repositories.users import SQLAUsersRepository
+from utils.repository import AbstractRepository
 
 
 class IUnitOfWork(ABC):
-    tasks: TasksRepository
-    task_history: TaskHistoryRepository
-    users: UsersRepository
+    tasks: AbstractRepository
+    task_history: AbstractRepository
+    users: AbstractRepository
 
     @abstractmethod
     async def __aenter__(self):
@@ -28,16 +29,16 @@ class IUnitOfWork(ABC):
         raise NotImplementedError
 
 
-class UnitOfWork():
+class SQLAUnitOfWork():
 
     def __init__(self):
         self.session_factory = async_session_maker
 
     async def __aenter__(self):
         self.session = self.session_factory()
-        self.tasks = TasksRepository(self.session)
-        self.task_history = TaskHistoryRepository(self.session)
-        self.users = UsersRepository(self.session)
+        self.tasks = SQLATasksRepository(self.session)
+        self.task_history = SQLATaskHistoryRepository(self.session)
+        self.users = SQLAUsersRepository(self.session)
 
     async def __aexit__(self, *args):
         await self.rollback()
