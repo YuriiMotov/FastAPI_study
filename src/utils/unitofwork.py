@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Type
 
 from db.database import async_session_maker
 from repositories.tasks import TasksRepository
@@ -8,9 +7,9 @@ from repositories.users import UsersRepository
 
 
 class IUnitOfWork(ABC):
-    tasks: Type[TasksRepository]
-    task_history: Type[TaskHistoryRepository]
-    users: Type[UsersRepository]
+    tasks: TasksRepository
+    task_history: TaskHistoryRepository
+    users: UsersRepository
 
     @abstractmethod
     async def __aenter__(self):
