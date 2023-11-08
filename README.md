@@ -31,6 +31,10 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
 12. [Lesson 16 (Software deployment on render.com)](#lesson-16-software-deployment-on-rendercom)
 
+13. [Layered architecture style](#layered-architecture-style)
+
+14. [UnitOfWork pattern with FastAPI](#unit-of-work-pattern-with-fastapi)
+
 
 
 ### Lesson 5 (user registration and authentification with fastapi-users)
@@ -445,4 +449,50 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 0. Implementation of changes made in the video
 
-    Commit: []()
+    I decided to use postgres instead of sqlite and store config in .env file. So, my implementation is a little different from original code.
+
+    Commit: [f48cc25](https://github.com/YuriiMotov/FastAPI_study/compare/afaa60f83d288e90a231702d5631cc26d1b3d9bf...f48cc250379f6b8640dc82223e6d1f8dca1fa739)
+
+1. A few code corrections (wrong type-hint for argument in TasksService.__init__(), SQL models and tables naming (should be singular)):
+
+    It turned out that it's not an easy task to make alembic migration if you need to rename a table with PK, FK and sequence.. I didn't manage to find solution. So, my migration will recreate table and all data will be lost.
+
+    Commit: [9c6c449](https://github.com/YuriiMotov/FastAPI_study/compare/79f0567c487c5c8ecc4af79b21c86dfc4fdb7bf7...9c6c449b9ae6cbb1e1d4b3450d3a5b290c13d114)
+
+
+2. One of the advantages of repository pattern is decoupling from database and the possibility to quickly change the data store method. For example we want to write unit-tests and store our data in memory instead of using SQLAlchemy.
+
+    Let's check it.
+    
+    To do that we have to implement `utils.repository.InMemoryRepository` class which will substitude `utils.repository.SQLAlchemyRepository`.
+    But we also have to implement `repositories.tasks.TasksInMemoryRepository` class which will substitude `repositories.tasks.TasksRepository`, because
+    `repositories.tasks.TasksRepository` descendant of the `utils.repository.SQLAlchemyRepository` class.
+    
+    I wouldn't say it looks beautiful..
+    
+    Commit: [2b7591d](https://github.com/YuriiMotov/FastAPI_study/compare/9c6c449b9ae6cbb1e1d4b3450d3a5b290c13d114...2b7591d846d640dc7eeacafb8c80992ad0d0c99a)
+    
+    
+### UnitOfWork pattern with FastAPI
+
+[Watch original lesson on Youtube](https://youtu.be/TaYg23VkCRI?si=Z8eSVQgUHS_E8Xfo)
+
+0. Implementation of changes made in the video
+
+    Commit: [5306df7](https://github.com/YuriiMotov/FastAPI_study/compare/fdf27d06ae78683e464fce298114408226ea5b81...5306df7df196e2b503e46b843c936b825b1877e9)
+
+1. Fix some mistakes:
+
+    Wrong attributes type: [23f891a](https://github.com/YuriiMotov/FastAPI_study/compare/5306df7df196e2b503e46b843c936b825b1877e9...23f891a0325a7181c13693fb085220f9082e1b32)
+    
+    Delete the extra field `author_id` in the `TaskSchemaEdit`: [33b4867](https://github.com/YuriiMotov/FastAPI_study/compare/23f891a0325a7181c13693fb085220f9082e1b32...33b4867a70740b37abd9eb64b00b32273d666233)
+    
+    Add missing methods to `AbstractRepository`: [27bb74b](https://github.com/YuriiMotov/FastAPI_study/compare/33b4867a70740b37abd9eb64b00b32273d666233...27bb74b622200ea0e5844cc3472ca806982d9d92)
+    
+2. Make some improvements:
+
+    Rename implementations that related to `SQLAlchemy`, add `SQLA` prefix to make things clearer: [4105d83](https://github.com/YuriiMotov/FastAPI_study/compare/27bb74b622200ea0e5844cc3472ca806982d9d92...4105d837a7ad8097b13613dfb37b26c432059bd3)
+    
+    Let's hide `UnitOfWork` under the hood (we don't have to create `TasksService` instance and pass `uow` to each method anymore): [a107cec](https://github.com/YuriiMotov/FastAPI_study/compare/4105d837a7ad8097b13613dfb37b26c432059bd3...a107cec7c2a2a4a4c61cab03f795ce1f490476b7)
+
+    Reducing code duplication in schema declarations: [2da4f96](https://github.com/YuriiMotov/FastAPI_study/compare/a107cec7c2a2a4a4c61cab03f795ce1f490476b7...2da4f9615d3acc4d246d781eb574bcea3945423a)
