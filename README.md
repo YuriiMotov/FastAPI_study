@@ -382,13 +382,13 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     After that the endpoint function is executed.
 
-    If any exception occures during this process (till the moment then Response is sent), this exception will be passed to the dependancies with `yield`. You can catch it and raise other exception (although, it's better not to do this), including HTTPException, which changes HTTP-Response.
+    If any exception occures during this process (till the moment then Response is sent), this exception will be passed to the dependencies with `yield`. You can catch it and raise other exception, including HTTPException (although, it's better not to do this), which changes HTTP-Response.
 
     After the endpoint's function has executed successfully and Response has sent to the client, background task starts.
 
-    If any exception occures during the background task execution, this exception will be passed to the dependancies with `yield`. You can catch it and do whatever you want except raising HTTPException (it doesn't make sence since the Respons has sent and it will couse another exception (RuntimeError: Caught handled exception, but response already started)).
+    If any exception occures during the background task execution, this exception will be passed to the dependencies with `yield`. You can catch it and do whatever you want except raising HTTPException (it doesn't make sence since the Respons has sent and it will couse another exception (RuntimeError: Caught handled exception, but response already started)).
 
-    Commit: [f805aea](https://github.com/YuriiMotov/FastAPI_study/compare/319e75f9282cf1a655f9b37d8ca25c9a5afc3b1c...f805aeaa8239277d1055d76e223661a69b4f0cbf)
+    Commit: [f805aea](https://github.com/YuriiMotov/FastAPI_study/compare/319e75f9282cf1a655f9b37d8ca25c9a5afc3b1c...f805aeaa8239277d1055d76e223661a69b4f0cbf), fix: [8c7b46d](https://github.com/YuriiMotov/FastAPI_study/compare/507ffd1bda54c7eb88559e728b6c1eb9c3c9d6fc...8c7b46d58cb7f96bc1b5eecbc2b2d137595ac559)
 
 
 ### Lesson 15 (Docker and Docker Compose)

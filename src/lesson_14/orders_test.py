@@ -68,7 +68,7 @@ async def operation_with_dependencies_1(
 
 
 ##########################################################################################
-# Nested dependancies and exception in the endpoint's function
+# Nested dependencies and exception in the endpoint's function
 @orders_router.post("/operation-with-dependencies-2")
 async def operation_with_dependencies_2(
     b: Annotated[str, Depends(dep_b)],
@@ -88,7 +88,7 @@ async def operation_with_dependencies_2(
     # dep_b after yield
     # dep_a caught an exception
     # dep_a after yield
-    # INFO:     127.0.0.1:55784 - "POST /orders-tests/operation-with-dependancies-2 HTTP/1.1" 400 Bad Request
+    # INFO:     127.0.0.1:55784 - "POST /orders-tests/operation-with-dependencies-2 HTTP/1.1" 400 Bad Request
     
 
 
