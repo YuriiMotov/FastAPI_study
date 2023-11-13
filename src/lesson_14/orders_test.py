@@ -1,6 +1,6 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, BackgroundTasks
+from fastapi import APIRouter, Depends, BackgroundTasks, HTTPException
 
 
 orders_router = APIRouter()
@@ -34,7 +34,14 @@ async def dep_c(a: Annotated[str, Depends(dep_a)]):
         yield a
     except Exception as e:
         print("dep_c caught an exception")
-        raise
+        
+        # Raising HTTPException after yield will work only for exception in the endpoint's
+        #  function. It will not work after exception in background task (it will couse
+        #  another exception).
+        raise HTTPException(
+            status_code=400, 
+            detail=f"Error occurred."
+        )
     finally:
         print("dep_c after yield")
 
@@ -81,7 +88,7 @@ async def operation_with_dependencies_2(
     # dep_b after yield
     # dep_a caught an exception
     # dep_a after yield
-    # INFO:     127.0.0.1:50824 - "POST /orders-tests/operation-with-dependencies-2 HTTP/1.1" 500 Internal Server Error
+    # INFO:     127.0.0.1:55784 - "POST /orders-tests/operation-with-dependancies-2 HTTP/1.1" 400 Bad Request
     
 
 
@@ -115,4 +122,5 @@ async def operation_with_dependencies_3(
     # dep_b after yield
     # dep_a caught an exception
     # dep_a after yield
+    # RuntimeError: Caught handled exception, but response already started.
 
