@@ -61,9 +61,9 @@ async def operation_with_dependencies_1(
 
 
 ##########################################################################################
-# Nested dependencies and exception in the endpoint's function
+# Nested dependancies and exception in the endpoint's function
 @orders_router.post("/operation-with-dependencies-2")
-async def operation_with_dependencies_1(
+async def operation_with_dependencies_2(
     b: Annotated[str, Depends(dep_b)],
     c: Annotated[str, Depends(dep_c)]
 ):
@@ -94,13 +94,13 @@ async def function_with_exception():
     print("Background task finished")
 
 @orders_router.post("/operation-with-dependencies-3")
-async def operation_with_dependencies_1(
+async def operation_with_dependencies_3(
     b: Annotated[str, Depends(dep_b)],
     c: Annotated[str, Depends(dep_c)],
     background_tasks: BackgroundTasks
 ):
     background_tasks.add_task(function_with_exception)
-    print("Sending response  from the endpoint's function")
+    print("Sending response from the endpoint's function")
     return (b, c)
 
     # dep_a before yield
