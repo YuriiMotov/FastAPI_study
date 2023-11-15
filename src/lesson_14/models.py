@@ -24,5 +24,6 @@ class OAuth2User(Base):
     disabled: Mapped[bool] = mapped_column(
         Boolean, default=True, nullable=False
     )
+    scopes: Mapped[str] = mapped_column(nullable=True, default='')
 
     

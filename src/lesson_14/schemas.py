@@ -6,6 +6,7 @@ class User(BaseModel):
     email: str | None = None
     fullname: str | None = None
     disabled: bool | None = None
+    scopes: str | None = None
 
 
 class UserInDB(User):

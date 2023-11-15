@@ -26,14 +26,14 @@ class Scopes(Enum):
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-scopes = {
+app_scopes = {
     Scopes.me.value: "Read information about the current user.",
     Scopes.items.value: "Read items."
 }
 
 oauth2_scheme = OAuth2PasswordBearer(
     tokenUrl="oauth2-tests/token",
-    scopes=scopes
+    scopes=app_scopes
 )
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -143,10 +143,21 @@ async def login(
             headers={"WWW-Authenticate": "Bearer"},
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    user_scopes = user.scopes.split(' ')
+    scopes = []
+    for scope in form_data.scopes:
+        if scope in user_scopes:
+            scopes.append(scope)
+        else:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="The requested scope is not allowed for this user"
+            )
+
     access_token = create_access_token(
         data={
             "sub": user.username,
-            "scopes": form_data.scopes
+            "scopes": scopes
         },
         expires_delta=access_token_expires
     )
@@ -158,10 +169,7 @@ async def create_user(
     user_data: schemas.UserCreate
 ) -> schemas.UserCreate:
     user = OAuth2User(
-        username=user_data.username,
-        fullname=user_data.fullname,
-        email=user_data.email,
-        disabled=user_data.disabled,
+        **user_data.model_dump(exclude=["password"]),
         hashed_password=hash_password(user_data.password)
     )
     session.add(user)
