@@ -508,6 +508,6 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 [Article](https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/)
 
-Let's add scopes to authorisation methods, [implemented before](https://github.com/YuriiMotov/FastAPI_study/compare/00734e4a31f213a5c51e07dc4b407830014236c8...50032916b0784e6f14a660f59be7f15606db7b2f) 
+Let's add scopes to authorization methods, [implemented before](https://github.com/YuriiMotov/FastAPI_study/compare/00734e4a31f213a5c51e07dc4b407830014236c8...50032916b0784e6f14a660f59be7f15606db7b2f) 
 
-Commit: []()
+Commits: [c80df85](https://github.com/YuriiMotov/FastAPI_study/compare/13f4c0634913b122afa10d9a9712a1f0523ee45a...c80df857c70c6dcec78bb5117a252c74a931246e), [ca56b21](https://github.com/YuriiMotov/FastAPI_study/compare/c80df857c70c6dcec78bb5117a252c74a931246e...ca56b2100d09a5c88b904476b3d8fca2ace4401b)
