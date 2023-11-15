@@ -504,7 +504,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 ### Reading Fast API documentation and practicing new things
 
-## 1. OAuth scopes
+#### 1. OAuth scopes
 
 [Article](https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/)
 
