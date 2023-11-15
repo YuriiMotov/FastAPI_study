@@ -1,11 +1,15 @@
 from datetime import datetime, timedelta
+from enum import Enum
 from typing import Annotated, Optional
 
-from fastapi import Depends, status
+from fastapi import Depends, status, Security
 from fastapi.exceptions import HTTPException
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from fastapi.security import (
+    OAuth2PasswordBearer, OAuth2PasswordRequestForm, SecurityScopes
+)
 from jose import JWTError, jwt
 from passlib.context import CryptContext
+from pydantic import ValidationError
 from sqlalchemy import select
 
 from config import OAUTH2_SECRET as SECRET_KEY
@@ -13,10 +17,24 @@ from database import AsyncSession, get_async_session
 from .models import OAuth2User
 from . import schemas
 
+
+class Scopes(Enum):
+    me: str = "me"
+    items: str = "items"
+
+
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="oauth2-tests/token")
+scopes = {
+    Scopes.me.value: "Read information about the current user.",
+    Scopes.items.value: "Read items."
+}
+
+oauth2_scheme = OAuth2PasswordBearer(
+    tokenUrl="oauth2-tests/token",
+    scopes=scopes
+)
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -61,25 +79,42 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None) -> s
 
 
 async def get_current_user(
+    security_scopes: SecurityScopes,
     session: Annotated[AsyncSession, Depends(get_async_session)],
     token: Annotated[str, Depends(oauth2_scheme)]
 ) -> Optional[OAuth2User]:
+    if security_scopes.scopes:
+        authenticate_value = f"Bearer scope={security_scopes.scope_str}"
+    else:
+        authenticate_value = "Bearer"
+
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
+        headers={"WWW-Authenticate": authenticate_value},
     )
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
         if username is None:
             raise credentials_exception
-        token_data = schemas.TokenData(username=username)
-    except JWTError:
+        scopes: list[str] = payload.get("scopes", [])
+        token_data = schemas.TokenData(
+            username=username,
+            scopes=scopes
+        )
+    except (JWTError, ValidationError):
         raise credentials_exception
     user = await get_user(session, username=token_data.username)
     if user is None:
         raise credentials_exception
+    for scope in security_scopes.scopes:
+        if scope not in token_data.scopes:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Not enough permissions",
+                headers={"WWW-Authenticate": authenticate_value},
+            )
     return user
 
 
@@ -109,7 +144,10 @@ async def login(
         )
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token = create_access_token(
-        data={"sub": user.username},
+        data={
+            "sub": user.username,
+            "scopes": form_data.scopes
+        },
         expires_delta=access_token_expires
     )
     return {"access_token": access_token, "token_type": "bearer"}

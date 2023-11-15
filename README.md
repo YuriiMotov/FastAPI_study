@@ -35,6 +35,10 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
 14. [UnitOfWork pattern with FastAPI](#unit-of-work-pattern-with-fastapi)
 
+15. [Reading Fast API documentation and practicing new things](#reading-fast-api-documentation-and-practicing-new-things)
+
+    15.1. [OAuth scopes](#1-oauth-scopes)
+
 
 
 ### Lesson 5 (user registration and authentification with fastapi-users)
@@ -496,3 +500,14 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
     Let's hide `UnitOfWork` under the hood (we don't have to create `TasksService` instance and pass `uow` to each method anymore): [a107cec](https://github.com/YuriiMotov/FastAPI_study/compare/4105d837a7ad8097b13613dfb37b26c432059bd3...a107cec7c2a2a4a4c61cab03f795ce1f490476b7)
 
     Reducing code duplication in schema declarations: [2da4f96](https://github.com/YuriiMotov/FastAPI_study/compare/a107cec7c2a2a4a4c61cab03f795ce1f490476b7...2da4f9615d3acc4d246d781eb574bcea3945423a)
+
+
+### Reading Fast API documentation and practicing new things
+
+## 1. OAuth scopes
+
+[Article](https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/)
+
+Let's add scopes to authorisation methods, [implemented before](https://github.com/YuriiMotov/FastAPI_study/compare/00734e4a31f213a5c51e07dc4b407830014236c8...50032916b0784e6f14a660f59be7f15606db7b2f) 
+
+Commit: []()

@@ -1,11 +1,10 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, FastAPI, Request, status
+from fastapi import APIRouter, Depends, FastAPI, Request, status, Security
 from fastapi.exceptions import HTTPException
 from fastapi.security import OAuth2PasswordRequestForm
 
 from database import AsyncSession, get_async_session
-from .auth import get_current_active_user
 from . import auth
 from . import schemas
 from .orders_test import orders_router
@@ -120,7 +119,7 @@ app.include_router(
 
 
 ##########################################################################################
-# Authorization via OAuth2 Bearter and Password
+# Authorization via OAuth2 Bearter and Password, with scopes
 
 oauth2_router = APIRouter()
 
@@ -145,9 +144,21 @@ async def register_user(
 
 @oauth2_router.get("/users/me", response_model=schemas.User)
 async def get_users_me(
-    current_user: Annotated[schemas.User, Depends(get_current_active_user)]
+    current_user: Annotated[
+        schemas.User,
+        Security(auth.get_current_active_user, scopes=[auth.Scopes.me.value])
+    ]
 ):
     return current_user
+
+@oauth2_router.get("/items")
+async def get_items(
+    current_user: Annotated[
+        schemas.User,
+        Security(auth.get_current_active_user, scopes=[auth.Scopes.items.value])
+    ]
+) -> str:
+    return "Secret items"
 
 
 app.include_router(
