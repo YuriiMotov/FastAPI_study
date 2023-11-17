@@ -519,7 +519,7 @@ Commits: [c80df85](https://github.com/YuriiMotov/FastAPI_study/compare/13f4c0634
 
 I have 2 applications (web_app and api_app) and have to run them separately. It's not very convenient.
 
-Let's mount `api_app` to `web_app` with path `api`!
+Let's mount `api_app` to `web_app` with path `/api`!
 
 FastAPI doesn't use lifespan for subapplications, so I combined initialization steps in one lifespan and use them for both apps.
 
