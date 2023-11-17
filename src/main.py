@@ -12,17 +12,17 @@ from sqlalchemy.exc import SQLAlchemyError
 from auth.router import router as router_auth
 from chat.router import router as router_chat
 from chat_v2.router import broadcast, router as router_chat_v2
-from config import REDIS_HOST, REDIS_PORT, WEB_APP_HOST, WEB_APP_PORT
+from config import (
+    REDIS_HOST, REDIS_PORT, WEB_APP_HOST, WEB_APP_PORT, API_APP_HOST, API_APP_PORT,
+    API_APP_PATH
+)
 from operations.router import router as router_operation
 from tasks.router import router as router_tasks
 from pages.router import router as router_pages
 
 
-##########################################################################################
-# API app
-
 @asynccontextmanager
-async def api_lifespan(app: FastAPI):
+async def lifespan(app: FastAPI):
     # `On startup` actions
     redis = aioredis.from_url(
         f"redis://{REDIS_HOST}:{REDIS_PORT}", encoding="utf8", decode_responses=True
@@ -33,9 +33,13 @@ async def api_lifespan(app: FastAPI):
     # `On shoutdown` actions
     await broadcast.disconnect()
 
+
+##########################################################################################
+# API app
+
 api_app = FastAPI(
     title="Trading App",
-    lifespan=api_lifespan
+    lifespan=lifespan
 )
 
 origins = [
@@ -127,20 +131,9 @@ api_app.include_router(
 ##########################################################################################
 # Web app
 
-@asynccontextmanager
-async def web_lifespan(app: FastAPI):
-    # `On startup` actions
-    redis = aioredis.from_url(
-        f"redis://{REDIS_HOST}:{REDIS_PORT}", encoding="utf8", decode_responses=True
-    )
-    FastAPICache.init(RedisBackend(redis), prefix="fastapi-cache")
-    yield
-    # `On shoutdown` actions
-
-
 web_app = FastAPI(
     title="Trading App",
-    lifespan=web_lifespan
+    lifespan=lifespan
 )
 
 web_app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -161,3 +154,7 @@ web_app.include_router(
     prefix='/pages',
     tags=['pages']
 )
+
+# Mount API app as a subapplication
+if (API_APP_HOST == WEB_APP_HOST) and (API_APP_PORT == WEB_APP_PORT):
+    web_app.mount(API_APP_PATH, api_app, )

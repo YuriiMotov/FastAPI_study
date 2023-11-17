@@ -4,7 +4,7 @@ from fastapi_cache.decorator import cache
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from config import API_APP_HOST, API_APP_PORT, HTTP_HTTPS_PROT, WS_WSS_PROT
+from config import API_APP_HOST, API_APP_PORT, API_APP_PATH, HTTP_HTTPS_PROT, WS_WSS_PROT
 from database import get_async_session
 from operations.router import get_specific_operations
 from schemas import ErrorDetails
@@ -29,12 +29,12 @@ async def get_search_page(
 
 @router.get("/chat")
 async def get_chat_page(request: Request):
-    api_srv_host_port = f"{API_APP_HOST}:{API_APP_PORT}"
+    api_srv_uri = f"{API_APP_HOST}:{API_APP_PORT}{API_APP_PATH}"
     return templates.TemplateResponse(
         'chat.html',
         {
             "request": request,
-            "API_SRV_HOST_PORT": api_srv_host_port,
+            "API_SRV_URI": api_srv_uri,
             "HTTP_HTTPS_PROT": HTTP_HTTPS_PROT,
             "WS_WSS_PROT": WS_WSS_PROT
         }
@@ -43,12 +43,12 @@ async def get_chat_page(request: Request):
 
 @router.get("/chat-v2")
 async def get_chat_v2_page(request: Request):
-    api_srv_host_port = f"{API_APP_HOST}:{API_APP_PORT}"
+    api_srv_uri = f"{API_APP_HOST}:{API_APP_PORT}{API_APP_PATH}"
     return templates.TemplateResponse(
         'chat_v2.html',
         {
             "request": request,
-            "API_SRV_HOST_PORT": api_srv_host_port,
+            "API_SRV_URI": api_srv_uri,
             "WS_WSS_PROT": WS_WSS_PROT
         }
     )

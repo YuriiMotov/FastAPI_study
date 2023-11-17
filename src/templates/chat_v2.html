@@ -27,7 +27,7 @@
         
             function join(name) {
             var host = window.location.host.split(':')[0];
-            var ws = new WebSocket("{{ WS_WSS_PROT }}://{{ API_SRV_HOST_PORT }}/chat-v2/chatroom-ws");
+            var ws = new WebSocket("{{ WS_WSS_PROT }}://{{ API_SRV_URI }}/chat-v2/chatroom-ws");
         
             var container = $('div#msgs');
             ws.onmessage = function(evt) {
