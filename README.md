@@ -511,3 +511,18 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 Let's add scopes to authorization methods, [implemented before](https://github.com/YuriiMotov/FastAPI_study/compare/00734e4a31f213a5c51e07dc4b407830014236c8...50032916b0784e6f14a660f59be7f15606db7b2f) 
 
 Commits: [c80df85](https://github.com/YuriiMotov/FastAPI_study/compare/13f4c0634913b122afa10d9a9712a1f0523ee45a...c80df857c70c6dcec78bb5117a252c74a931246e), [ca56b21](https://github.com/YuriiMotov/FastAPI_study/compare/c80df857c70c6dcec78bb5117a252c74a931246e...ca56b2100d09a5c88b904476b3d8fca2ace4401b)
+
+
+#### 2. Sub Applications - Mounts
+
+[Article](https://fastapi.tiangolo.com/advanced/sub-applications/)
+
+I have 2 applications (web_app and api_app) and have to run them separately. It's not very convenient.
+
+Let's mount `api_app` to `web_app` with path `api`!
+
+FastAPI doesn't use lifespan for subapplications, so I combined initialization steps in one lifespan and use them for both apps.
+
+Now we can run these applications either separately or together depends on settings (if host and port is the same for web_app and api_app, then api_app will be mounted as subapp).
+
+Commit: [c2e5583](https://github.com/YuriiMotov/FastAPI_study/compare/4697006a3d09399a41ce76c09f66d507d842b449...c2e5583f70b6eacf4f31f005c971d95a38a39179)
