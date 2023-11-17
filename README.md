@@ -517,12 +517,12 @@ Commits: [c80df85](https://github.com/YuriiMotov/FastAPI_study/compare/13f4c0634
 
 [Article](https://fastapi.tiangolo.com/advanced/sub-applications/)
 
-I have 2 applications (web_app and api_app) and have to run them separately. It's not very convenient.
+I have 2 applications (`web_app` and `api_app`) and have to run them separately. It's not very convenient.
 
 Let's mount `api_app` to `web_app` with path `/api`!
 
-FastAPI doesn't use lifespan for subapplications, so I combined initialization steps in one lifespan and use them for both apps.
+FastAPI doesn't use `lifespan` for subapplications, so I combined initialization steps in one `lifespan` and use them for both apps.
 
-Now we can run these applications either separately or together depends on settings (if host and port is the same for web_app and api_app, then api_app will be mounted as subapp).
+Now we can run these applications either separately or together depends on settings (if `host` and `port` is the same for `web_app` and `api_app`, then `api_app` will be mounted as subapp).
 
 Commit: [c2e5583](https://github.com/YuriiMotov/FastAPI_study/compare/4697006a3d09399a41ce76c09f66d507d842b449...c2e5583f70b6eacf4f31f005c971d95a38a39179)
