@@ -506,7 +506,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
 #### 1. OAuth scopes
 
-[Article](https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/)
+Article: [https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/](https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/)
 
 Let's add scopes to authorization methods, [implemented before](https://github.com/YuriiMotov/FastAPI_study/compare/00734e4a31f213a5c51e07dc4b407830014236c8...50032916b0784e6f14a660f59be7f15606db7b2f) 
 
@@ -515,7 +515,7 @@ Commits: [c80df85](https://github.com/YuriiMotov/FastAPI_study/compare/13f4c0634
 
 #### 2. Sub Applications - Mounts
 
-[Article](https://fastapi.tiangolo.com/advanced/sub-applications/)
+Article: [https://fastapi.tiangolo.com/advanced/sub-applications/](https://fastapi.tiangolo.com/advanced/sub-applications/)
 
 I have 2 applications (`web_app` and `api_app`) and have to run them separately. It's not very convenient.
 
@@ -526,3 +526,14 @@ FastAPI doesn't use `lifespan` for subapplications, so I combined initialization
 Now we can run these applications either separately or together depends on settings (if `host` and `port` is the same for `web_app` and `api_app`, then `api_app` will be mounted as subapp).
 
 Commit: [c2e5583](https://github.com/YuriiMotov/FastAPI_study/compare/4697006a3d09399a41ce76c09f66d507d842b449...c2e5583f70b6eacf4f31f005c971d95a38a39179)
+
+
+#### 3. Testing WebSockets
+
+Article: [https://fastapi.tiangolo.com/advanced/testing-websockets/](https://fastapi.tiangolo.com/advanced/testing-websockets/)
+
+Let's test our chat. Commit: [2bb68de](https://github.com/YuriiMotov/FastAPI_study/compare/7084d30cb1c98d76dd3879f66b8163cee753aa50...2bb68def065a815f605fc5b70e7f72198032dca5)
+
+There is a problem. If something is wrong in your route function and server doesn't send anything to client, test will be blocked in a deadloop. Commit: [77d3000](https://github.com/YuriiMotov/FastAPI_study/compare/2bb68def065a815f605fc5b70e7f72198032dca5...77d300058c867ca619864658b0a41bf3d39f8633) (Here we forward text only to client, who sent this message, but don't forward it to other connected clients).
+To solve this problem it's needed to set timeout when `self._send_queue.get()` is called in `starlette.testclient.WebSocketTestSession.receive()`. I'll add an issue to `starlette` repository.
+
