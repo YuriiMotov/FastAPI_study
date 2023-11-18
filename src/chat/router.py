@@ -23,10 +23,11 @@ async def websocket_endpoint(websocket: WebSocket, client_id: int):
     try:
         while True:
             data = await websocket.receive_text()
-            async with async_session_maker() as session:
-                await chat_manager.broadcast(
-                    f"#{client_id} says: {data}", session=session, add_to_db=True
-                )
+            await websocket.send_text(f"#{client_id} says: {data}")
+            # async with async_session_maker() as session:
+            #     await chat_manager.broadcast(
+            #         f"#{client_id} says: {data}", session=session, add_to_db=True
+            #     )
     except WebSocketDisconnect:
         chat_manager.disconnect(websocket)
         await chat_manager.broadcast(f"#{client_id} left the chat")
