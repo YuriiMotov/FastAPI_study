@@ -41,6 +41,9 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
     15.2. [Sub Applications - Mounts](#2-sub-applications---mounts)
 
+    15.3. [Testing WebSockets](#3-testing-websockets)
+    
+
 ### Lesson 5 (user registration and authentification with fastapi-users)
 
 [Watch original lesson on Youtube](https://youtu.be/nfueh3ei8HU?si=2CGerqFNvvFD2PJf)
