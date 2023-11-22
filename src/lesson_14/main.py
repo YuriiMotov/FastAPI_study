@@ -11,47 +11,47 @@ from .orders_test import orders_router
 app = FastAPI()
 
 ##########################################################################################
-# Dependancy with yield
+# Dependency with yield
 
 async def func_with_yield() -> str:
     print("Before yield")
     yield "value"
     print("After yield")
 
-@app.get("/dependancy-with-yield")
-def test_dependancy_with_yield(
-    dependancy: Annotated[str, Depends(func_with_yield)]
+@app.get("/dependency-with-yield")
+def test_dependency_with_yield(
+    dependency: Annotated[str, Depends(func_with_yield)]
 ) -> str:
     print("Inside the route")
-    print(f"{dependancy=}")
+    print(f"{dependency=}")
     return "Take a look at the console"
 
 
 
 ##########################################################################################
-# Dependancy with parameters
+# Dependency with parameters
 
 def func_with_params(offset: int = 0, cnt: int = 10) -> dict[str, int]:
     return {"offset": offset, "cnt": cnt}
 
 
-@app.get("/dependancy-with-params")
-def test_dependancy_with_params(
+@app.get("/dependency-with-params")
+def test_dependency_with_params(
     params: Annotated[dict[str, int], Depends(func_with_params)]
 ) -> str:
     return f"{params=}"
 
 
 # You can define how to pass these parameters
-@app.get("/dependancy-with-params-in-path/{offset}/{cnt}")
-def test_dependancy_with_params(
+@app.get("/dependency-with-params-in-path/{offset}/{cnt}")
+def test_dependency_with_params(
     params: Annotated[dict[str, int], Depends(func_with_params)]
 ) -> str:
     return f"{params=}"
 
 
 ##########################################################################################
-# Dependancy as a class
+# Dependency as a class
 
 class Params():
     def __init__(self, offset: int = 0, cnt: int = 10):
@@ -62,8 +62,8 @@ class Params():
         return f"{self.__class__.__name__}(offset={self.offset}, cnt={self.cnt})"
 
 
-@app.get("/dependancy-with-params-class")
-def test_dependancy_with_params_class(
+@app.get("/dependency-with-params-class")
+def test_dependency_with_params_class(
     params: Annotated[Params, Depends(Params)]
 ) -> str:
     return f"{params=}"
@@ -94,7 +94,7 @@ def get_payments(authorized: Annotated[bool, Depends(auth_guard_payments)]) -> s
 
 
 ##########################################################################################
-# Dependancies in FastAPI endpoint
+# Dependencies in FastAPI endpoint
 
 @app.get("/payments-2", dependencies=[Depends(auth_guard_payments)])
 def get_payments() -> str:
@@ -102,7 +102,7 @@ def get_payments() -> str:
 
 
 ##########################################################################################
-# Dependancies in FastAPI router
+# Dependencies in FastAPI router
 
 router = APIRouter()
 
@@ -164,7 +164,7 @@ app.include_router(
 
 
 ##########################################################################################
-# Dependancies call order
+# Dependencies call order
 
 app.include_router(
     orders_router,
