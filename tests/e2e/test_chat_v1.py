@@ -2,8 +2,7 @@ import random
 
 from starlette.testclient import WebSocketTestSession
 
-from conftest import client
-
+from tests.e2e.conftest import client
 
 
 def test_send_msg():

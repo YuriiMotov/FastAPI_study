@@ -2,7 +2,6 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, FastAPI, Request, status, Security
 from fastapi.exceptions import HTTPException
-from fastapi.security import OAuth2PasswordRequestForm
 
 from database import AsyncSession, get_async_session
 from . import auth
@@ -124,21 +123,17 @@ app.include_router(
 oauth2_router = APIRouter()
 
 
-@oauth2_router.post("/token", response_model=schemas.Token)
+@oauth2_router.post("/token", response_model=schemas.Tokens)
 async def login_for_access_token(
-    session: Annotated[AsyncSession, Depends(get_async_session)],
-    form_data: OAuth2PasswordRequestForm = Depends()
+    tokens: Annotated[schemas.Tokens, Depends(auth.login)],
 ):
-    token = await auth.login(session=session, form_data=form_data)
-    return token
+    return tokens
 
 
 @oauth2_router.post("/register", response_model=schemas.User)
 async def register_user(
-    session: Annotated[AsyncSession, Depends(get_async_session)],
-    user_data: schemas.UserCreate
+    user: Annotated[schemas.UserCreate, Depends(auth.create_user)]
 ):
-    user = await auth.create_user(session=session, user_data=user_data)
     return user
 
 

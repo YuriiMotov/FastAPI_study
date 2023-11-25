@@ -4,7 +4,7 @@ import pytest
 
 from sqlalchemy import select
 
-from conftest import client, async_session_maker
+from tests.e2e.conftest import client, async_session_maker
 from auth.models import Role
 
 
@@ -19,7 +19,6 @@ async def add_role():
 
 @pytest.mark.asyncio_cooperative
 async def test_register(ac: AsyncClient):
-
     await add_role()
     response = await ac.post(
         '/auth/register',
