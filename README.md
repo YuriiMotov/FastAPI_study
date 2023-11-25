@@ -42,7 +42,9 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
     15.2. [Sub Applications - Mounts](#2-sub-applications---mounts)
 
     15.3. [Testing WebSockets](#3-testing-websockets)
-    
+
+    15.4. [OAuth2 with refresh tokens + rotation](#4-oauth2-with-refresh-tokens--rotation)
+
 
 ### Lesson 5 (user registration and authentification with fastapi-users)
 
@@ -540,3 +542,14 @@ Let's test our chat. Commit: [2bb68de](https://github.com/YuriiMotov/FastAPI_stu
 There is a problem. If something is wrong in your route function and server doesn't send anything to client, test will be blocked in a deadloop. Commit: [77d3000](https://github.com/YuriiMotov/FastAPI_study/compare/2bb68def065a815f605fc5b70e7f72198032dca5...77d300058c867ca619864658b0a41bf3d39f8633) (Here we forward text only to client, who sent this message, but don't forward it to other connected clients).
 To solve this problem it's needed to set timeout when `self._send_queue.get()` is called in `starlette.testclient.WebSocketTestSession.receive()`. I'll add an issue to `starlette` repository.
 
+#### 4. OAuth2 with refresh tokens + rotation
+
+Article: [https://stateful.com/blog/oauth-refresh-token-best-practices](https://stateful.com/blog/oauth-refresh-token-best-practices)
+
+To make app more sequre it's better to set short lifetime for access tokens and user refresh token to get new access token. Along with refresh token rotetion to make it even more secure.
+
+Commit: [056395e](https://github.com/YuriiMotov/FastAPI_study/compare/33ec4ecf8988db2ec410d77c924f2a9c6d6d0b96...056395efa8f5666cb036598501e7e7dbf5f77bea)
+
+Several known disadvantages of this implementation: 1) it will work if only each user use one connection, 2) if malicious user steal the refresh token, they can block the ability of user to work with system until stolen token expired.
+
+I think that writing your own authorization methods is not the best solution. It's better to use proven library instead. I'm going to try integration FastAPI with [keycloak](https://www.keycloak.org/) later. 
