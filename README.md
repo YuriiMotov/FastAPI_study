@@ -45,6 +45,8 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
 
     15.4. [OAuth2 with refresh tokens + rotation](#4-oauth2-with-refresh-tokens--rotation)
 
+    15.5. [Request rate limit](#5-request-rate-limit)
+    
 
 ### Lesson 5 (user registration and authentification with fastapi-users)
 
@@ -553,3 +555,10 @@ Commit: [056395e](https://github.com/YuriiMotov/FastAPI_study/compare/33ec4ecf89
 Several known disadvantages of this implementation: 1) it will work if only each user use one connection, 2) if malicious user steal the refresh token, they can block the ability of user to work with system until stolen token expired.
 
 I think that writing your own authorization methods is not the best solution. It's better to use proven library instead. I'm going to try integration FastAPI with [keycloak](https://www.keycloak.org/) later. 
+
+
+#### 5. Request rate limit
+
+Article: [https://www.moesif.com/blog/technical/rate-limiting/Best-Practices-for-API-Rate-Limits-and-Quotas-With-Moesif-to-Avoid-Angry-Customers/](https://www.moesif.com/blog/technical/rate-limiting/Best-Practices-for-API-Rate-Limits-and-Quotas-With-Moesif-to-Avoid-Angry-Customers/)
+
+Rate limit with `slowapi`: [commit 868887f](https://github.com/YuriiMotov/FastAPI_study/compare/f36064b9331031da7e451f5b22754bfe4451f9e8...868887f3253dd7d8f17c34111634e87a7729009a)
