@@ -1,13 +1,10 @@
 alembic
-broadcaster[redis]
-celery
-gunicorn
 fastapi[all]
-fastapi-cache2[redis]
-fastapi-users[sqlalchemy]
-flower
+passlib
 python-jose[cryptography]
 psycopg[binary]
 python-dotenv
-setuptools
 sqlalchemy
+
+pytest
+pytest-asyncio-cooperative
