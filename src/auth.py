@@ -9,10 +9,10 @@ from sqlalchemy import select
 
 from config import OAUTH2_SECRET as SECRET_KEY
 from database import AsyncSession, get_async_session
-from .oauth_password_refresh_scheme import OAuth2PasswordAndRefreshRequestForm
-from .models import OAuth2User
-from .schemas import User, UserCreate
-from .token_service import TokenService, TokenServiceDep, MemoryStorage
+from oauth_password_refresh_scheme import OAuth2PasswordAndRefreshRequestForm
+from models import OAuth2User
+from schemas import User, UserCreate
+from token_service import TokenService, TokenServiceDep, MemoryStorage
 
 
 class Scopes(Enum):

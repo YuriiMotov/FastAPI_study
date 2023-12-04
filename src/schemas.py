@@ -1,5 +1,29 @@
 from pydantic import BaseModel
 
 
-class ErrorDetails(BaseModel):
-    detail: str
+class User(BaseModel):
+    username: str
+    email: str | None = None
+    fullname: str | None = None
+    disabled: bool | None = None
+    scopes: str | None = None
+
+
+class UserInDB(User):
+    hashed_password: str
+
+
+class UserCreate(User):
+    password: str
+
+
+class Tokens(BaseModel):
+    access_token: str
+    refresh_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: str | None = None
+    scopes: list[str] = []
+    exp: int

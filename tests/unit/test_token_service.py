@@ -4,7 +4,7 @@ import random
 from fastapi import HTTPException
 import pytest
 
-from lesson_14.token_service import TokenService, MemoryStorage, InvalidToken
+from token_service import TokenService, MemoryStorage, InvalidToken
 
 @pytest.mark.asyncio_cooperative
 async def test_refresh_token_invalidate():
