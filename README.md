@@ -46,6 +46,8 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
     15.4. [OAuth2 with refresh tokens + rotation](#4-oauth2-with-refresh-tokens--rotation)
 
     15.5. [Request rate limit](#5-request-rate-limit)
+
+    15.6. [SQLModel](#6-sqlmodel)
     
 
 ### Lesson 5 (user registration and authentification with fastapi-users)
@@ -562,3 +564,13 @@ I think that writing your own authorization methods is not the best solution. It
 Article: [https://www.moesif.com/blog/technical/rate-limiting/Best-Practices-for-API-Rate-Limits-and-Quotas-With-Moesif-to-Avoid-Angry-Customers/](https://www.moesif.com/blog/technical/rate-limiting/Best-Practices-for-API-Rate-Limits-and-Quotas-With-Moesif-to-Avoid-Angry-Customers/)
 
 Rate limit with `slowapi`: [commit 868887f](https://github.com/YuriiMotov/FastAPI_study/compare/f36064b9331031da7e451f5b22754bfe4451f9e8...868887f3253dd7d8f17c34111634e87a7729009a)
+
+
+#### 6. SQLModel
+
+Article: [https://sqlmodel.tiangolo.com/](https://sqlmodel.tiangolo.com/)
+
+Let's practice using SQLModel library and refactor oauth2 methods to use SQLModel.
+
+Commit: [581ff8f](https://github.com/YuriiMotov/FastAPI_study/compare/7bdda3eee5cb7d5aac47204597bfc3a2f14ca96a...581ff8fa98e93ab1a7e776a8a9d993660067b2b8)
+
