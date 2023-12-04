@@ -7,7 +7,7 @@ from fastapi import HTTPException
 from jose import JWTError, jwt
 from pydantic import ValidationError
 
-from schemas import TokenData
+from models.tokens import TokenData
 
 
 ALGORITHM = "HS256"

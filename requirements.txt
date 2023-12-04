@@ -1,10 +1,10 @@
 alembic
+sqlmodel
 fastapi[all]
 passlib
 python-jose[cryptography]
 psycopg[binary]
 python-dotenv
-sqlalchemy
 
 pytest
 pytest-asyncio-cooperative

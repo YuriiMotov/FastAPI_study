@@ -10,8 +10,8 @@ from sqlalchemy import select
 from config import OAUTH2_SECRET as SECRET_KEY
 from database import AsyncSession, get_async_session
 from oauth_password_refresh_scheme import OAuth2PasswordAndRefreshRequestForm
-from models import OAuth2User
-from schemas import User, UserCreate
+from models.oauth2user import OAuth2UserCreate, OAuth2UserDB
+from models.tokens import Tokens
 from token_service import TokenService, TokenServiceDep, MemoryStorage
 
 
@@ -37,8 +37,8 @@ oauth2_scheme = OAuth2PasswordBearer(
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
-async def get_user(session: AsyncSession, username: str) -> Optional[OAuth2User]:
-    st = select(OAuth2User).filter_by(username=username)
+async def get_user(session: AsyncSession, username: str) -> Optional[OAuth2UserDB]:
+    st = select(OAuth2UserDB).filter_by(username=username)
     user = await session.scalar(st)
     if user is not None:
         return user
@@ -58,7 +58,7 @@ async def authenticate_user_pwd_or_refreshtoken(
     session: Annotated[AsyncSession, Depends(get_async_session)],
     form_data: Annotated[OAuth2PasswordAndRefreshRequestForm, Depends()],
     token_service: Annotated[TokenService, Depends(token_service_dep)]
-) -> Optional[OAuth2User]:
+) -> OAuth2UserDB:
     user = None
     if form_data.grant_type == "password":
         user = await get_user(session, form_data.username)
@@ -97,7 +97,7 @@ async def get_current_user(
     session: Annotated[AsyncSession, Depends(get_async_session)],
     token: Annotated[str, Depends(oauth2_scheme)],
     token_service: Annotated[TokenService, Depends(token_service_dep)]
-) -> Optional[OAuth2User]:
+) -> Optional[OAuth2UserDB]:
     if security_scopes.scopes:
         authenticate_value = f"Bearer scope={security_scopes.scope_str}"
     else:
@@ -125,8 +125,8 @@ async def get_current_user(
 
 
 async def get_current_active_user(
-    current_user: Annotated[User, Depends(get_current_user)]
-):
+    current_user: Annotated[OAuth2UserDB, Depends(get_current_user)]
+) -> OAuth2UserDB:
     if current_user.disabled:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -138,8 +138,8 @@ async def get_current_active_user(
 async def login(
     form_data: Annotated[OAuth2PasswordAndRefreshRequestForm, Depends()],
     token_service: Annotated[TokenService, Depends(token_service_dep)],
-    user: Annotated[OAuth2User, Depends(authenticate_user_pwd_or_refreshtoken)]
-):
+    user: Annotated[OAuth2UserDB, Depends(authenticate_user_pwd_or_refreshtoken)]
+) -> Tokens:
     user_scopes = user.scopes.split(' ')
     scopes = []
     for scope in form_data.scopes:
@@ -155,21 +155,22 @@ async def login(
     access_token = await token_service.create_access_token(data=token_data)
     refresh_token = await token_service.create_refresh_token(data=token_data)
 
-    return {
-        "access_token": access_token,
-        "refresh_token": refresh_token,
-        "token_type": "bearer"
-    }
+    return Tokens(
+        access_token=access_token,
+        refresh_token=refresh_token,
+        token_type="bearer"
+    )
 
 
 async def create_user(
     session: Annotated[AsyncSession, Depends(get_async_session)],
-    user_data: UserCreate
-) -> UserCreate:
-    user = OAuth2User(
+    user_data: OAuth2UserCreate
+) -> OAuth2UserDB:
+    user = OAuth2UserDB(
         **user_data.model_dump(exclude=["password"]),
         hashed_password=hash_password(user_data.password)
     )
     session.add(user)
     await session.commit()
-    return user_data
+    await session.refresh(user)
+    return user

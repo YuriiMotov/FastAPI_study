@@ -3,7 +3,8 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, FastAPI, Security
 
 import auth
-import schemas
+from models.oauth2user import OAuth2UserCreate, OAuth2UserOut, OAuth2UserDB
+from models.tokens import Tokens
 
 app = FastAPI()
 
@@ -11,24 +12,24 @@ app = FastAPI()
 oauth2_router = APIRouter()
 
 
-@oauth2_router.post("/token", response_model=schemas.Tokens)
+@oauth2_router.post("/token", response_model=Tokens)
 async def login_for_access_token(
-    tokens: Annotated[schemas.Tokens, Depends(auth.login)],
+    tokens: Annotated[Tokens, Depends(auth.login)],
 ):
     return tokens
 
 
-@oauth2_router.post("/register", response_model=schemas.User)
+@oauth2_router.post("/register", response_model=OAuth2UserOut)
 async def register_user(
-    user: Annotated[schemas.UserCreate, Depends(auth.create_user)]
+    user: Annotated[OAuth2UserCreate, Depends(auth.create_user)]
 ):
     return user
 
 
-@oauth2_router.get("/users/me", response_model=schemas.User)
+@oauth2_router.get("/users/me", response_model=OAuth2UserOut)
 async def get_users_me(
     current_user: Annotated[
-        schemas.User,
+        OAuth2UserDB,
         Security(auth.get_current_active_user, scopes=[auth.Scopes.me.value])
     ]
 ):
@@ -37,7 +38,7 @@ async def get_users_me(
 @oauth2_router.get("/items")
 async def get_items(
     current_user: Annotated[
-        schemas.User,
+        OAuth2UserDB,
         Security(auth.get_current_active_user, scopes=[auth.Scopes.items.value])
     ]
 ) -> str:
