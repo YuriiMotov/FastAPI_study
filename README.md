@@ -570,7 +570,6 @@ Rate limit with `slowapi`: [commit 868887f](https://github.com/YuriiMotov/FastAP
 
 Article: [https://sqlmodel.tiangolo.com/](https://sqlmodel.tiangolo.com/)
 
-Let's practice using SQLModel library and refactor oauth2 methods to use SQLModel.
+Let's practice using SQLModel library and refactor oauth2 methods to use SQLModel. Commit: [581ff8f](https://github.com/YuriiMotov/FastAPI_study/compare/7bdda3eee5cb7d5aac47204597bfc3a2f14ca96a...581ff8fa98e93ab1a7e776a8a9d993660067b2b8)
 
-Commit: [581ff8f](https://github.com/YuriiMotov/FastAPI_study/compare/7bdda3eee5cb7d5aac47204597bfc3a2f14ca96a...581ff8fa98e93ab1a7e776a8a9d993660067b2b8)
-
+And let's add more complex models: Hero and Team with m2m relations. Commit: [148b8fd](https://github.com/YuriiMotov/FastAPI_study/compare/581ff8fa98e93ab1a7e776a8a9d993660067b2b8...148b8fd3660a364ccbd712fb53b0ec495b26d99b)
