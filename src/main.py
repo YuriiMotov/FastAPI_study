@@ -5,6 +5,9 @@ from fastapi import APIRouter, Depends, FastAPI, Security
 import auth
 from models.oauth2user import OAuth2UserCreate, OAuth2UserOut, OAuth2UserDB
 from models.tokens import Tokens
+from routers.heroes import heroes_router
+from routers.teams import teams_router
+
 
 app = FastAPI()
 
@@ -51,3 +54,5 @@ app.include_router(
     tags=["oauth2"]
 )
 
+app.include_router(heroes_router)
+app.include_router(teams_router)
