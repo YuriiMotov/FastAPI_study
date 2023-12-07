@@ -48,6 +48,8 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
     15.5. [Request rate limit](#5-request-rate-limit)
 
     15.6. [SQLModel](#6-sqlmodel)
+
+    15.7. [Monitoring FastAPI with Prometheus and Grafana](#7-monitoring-fastapi-with-prometheus-and-grafana)
     
 
 ### Lesson 5 (user registration and authentification with fastapi-users)
@@ -573,3 +575,10 @@ Article: [https://sqlmodel.tiangolo.com/](https://sqlmodel.tiangolo.com/)
 Let's practice using SQLModel library and refactor oauth2 methods to use SQLModel. Commit: [581ff8f](https://github.com/YuriiMotov/FastAPI_study/compare/7bdda3eee5cb7d5aac47204597bfc3a2f14ca96a...581ff8fa98e93ab1a7e776a8a9d993660067b2b8)
 
 And let's add more complex models: Hero and Team with m2m relations. Commit: [148b8fd](https://github.com/YuriiMotov/FastAPI_study/compare/581ff8fa98e93ab1a7e776a8a9d993660067b2b8...148b8fd3660a364ccbd712fb53b0ec495b26d99b)
+
+
+#### 7. Monitoring FastAPI with Prometheus and Grafana
+
+Article: [https://dev.to/ken_mwaura1/getting-started-monitoring-a-fastapi-app-with-grafana-and-prometheus-a-step-by-step-guide-3fbn](https://dev.to/ken_mwaura1/getting-started-monitoring-a-fastapi-app-with-grafana-and-prometheus-a-step-by-step-guide-3fbn)
+
+Commit: [450e979](https://github.com/YuriiMotov/FastAPI_study/compare/47200a94fa9cfc254fa4bc40de6e6776cd5559a5...450e9795f47f5a804ca5d7581943549fd9cbebdc)
