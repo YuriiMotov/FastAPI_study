@@ -11,3 +11,4 @@ psycopg[binary]
 python-dotenv
 setuptools
 sqlalchemy
+prometheus-fastapi-instrumentator

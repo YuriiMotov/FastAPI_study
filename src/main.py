@@ -6,6 +6,7 @@ from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi_cache import FastAPICache
 from fastapi_cache.backends.redis import RedisBackend
+from prometheus_fastapi_instrumentator import Instrumentator
 from redis import asyncio as aioredis
 from sqlalchemy.exc import SQLAlchemyError
 
@@ -135,6 +136,8 @@ web_app = FastAPI(
     title="Trading App",
     lifespan=lifespan
 )
+
+Instrumentator().instrument(web_app).expose(web_app)
 
 web_app.mount("/static", StaticFiles(directory="static"), name="static")
 

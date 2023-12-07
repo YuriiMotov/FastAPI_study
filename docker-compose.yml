@@ -5,18 +5,18 @@ services:
     container_name: db_app
     volumes:
       - db-data:/var/lib/postgresql/data
-    command: -p 1221
+    command: -p 5432
     expose:
-      - 1221
+      - 5432
     env_file:
       - .env-prod
 
   redis:
     image: redis:7
     container_name: redis_app
-    command: --port 5370
+    command: --port 6379
     expose:
-      - 5370
+      - 6379
 
   api_app:
     build:
@@ -27,6 +27,8 @@ services:
     command: ["/fastapi_app/docker/api_app.sh"]
     ports:
       - 9999:8000
+    expose:
+      - 8000
     depends_on:
       - db
       - redis
@@ -40,6 +42,8 @@ services:
     command: ["/fastapi_app/docker/web_app.sh"]
     ports:
       - 9998:8000
+    expose:
+      - 8000
     depends_on:
       - api_app
 
@@ -65,7 +69,44 @@ services:
       - celery
     ports:
       - 8888:5555
-  
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    ports:
+      - 9090:9090
+    expose:
+      - 9090
+    volumes:
+      - ./prometheus_data/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    depends_on:
+      - web_app
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+    depends_on:
+      - web_app
+
+
 volumes:
   db-data:
       name: ${DATABASE_VOLUME}
+  prometheus_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./prometheus_data
+  grafana_data:
+    driver: local
+    driver_opts:
+      o: bind
+      type: none
+      device: ./grafana_data
