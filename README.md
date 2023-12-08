@@ -582,3 +582,9 @@ And let's add more complex models: Hero and Team with m2m relations. Commit: [14
 Article: [https://dev.to/ken_mwaura1/getting-started-monitoring-a-fastapi-app-with-grafana-and-prometheus-a-step-by-step-guide-3fbn](https://dev.to/ken_mwaura1/getting-started-monitoring-a-fastapi-app-with-grafana-and-prometheus-a-step-by-step-guide-3fbn)
 
 Commit: [450e979](https://github.com/YuriiMotov/FastAPI_study/compare/47200a94fa9cfc254fa4bc40de6e6776cd5559a5...450e9795f47f5a804ca5d7581943549fd9cbebdc)
+
+There is a problem: when you run app with `guvicorn` then counters will be broken (every worker will have their own counter variables).
+
+To solve this problem you should create in your app work folder empty folder with name `tmp_multiproc` before starting your app (or clear this folder if it already exists) and add enviroument variable `PROMETHEUS_MULTIPROC_DIR=/tmp_multiproc`. This looks bad but it's official solution.
+
+Commit: []()
