@@ -587,4 +587,4 @@ There is a problem: when you run app with `guvicorn` then counters will be broke
 
 To solve this problem you should create in your app work folder empty folder with name `tmp_multiproc` before starting your app (or clear this folder if it already exists) and add enviroument variable `PROMETHEUS_MULTIPROC_DIR=/tmp_multiproc`. This looks bad but it's official solution.
 
-Commit: []()
+Commit: [103f958](https://github.com/YuriiMotov/FastAPI_study/compare/bc440230a77bfc06f03fc5628d5dd48073628e45...103f9589023f855bc3fa3b94955de3f0d7f7360c)
