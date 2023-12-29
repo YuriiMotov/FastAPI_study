@@ -35,9 +35,9 @@ async def dep_c(a: Annotated[str, Depends(dep_a)]):
     except Exception as e:
         print("dep_c caught an exception")
         
-        # Raising HTTPException after yield will work only for exception in the endpoint's
-        #  function. It will not work after exception in background task (it will couse
-        #  another exception).
+        # Now it's absolutely ok to raise `HTTPException` after yield in dependency,
+        # since this part is executed before response is sent and background 
+        # task is executed.
         raise HTTPException(
             status_code=400, 
             detail=f"Error occurred."
@@ -114,13 +114,9 @@ async def operation_with_dependencies_3(
     # dep_b before yield
     # dep_c before yield
     # Sending response  from the endpoint's function
+    # dep_c after yield
+    # dep_b after yield
+    # dep_a after yield
     # INFO:     127.0.0.1:53498 - "POST /orders-tests/operation-with-dependencies-3 HTTP/1.1" 200 OK
     # Start background task's execution and raise exception
-    # dep_c caught an exception
-    # dep_c after yield
-    # dep_b caught an exception
-    # dep_b after yield
-    # dep_a caught an exception
-    # dep_a after yield
-    # RuntimeError: Caught handled exception, but response already started.
-
+    # Exception: Exception from the background task's function
