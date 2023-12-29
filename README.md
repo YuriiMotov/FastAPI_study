@@ -158,7 +158,7 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     Commit: [cb97d4f](https://github.com/YuriiMotov/FastAPI_study/compare/e7b29bde101c0c509820c25372ceab2376eb0887...cb97d4fa4dad3b72f6532dc8d93034e2c6516560)
 
-3. Deeping into `fastapi-cache` library.
+3. Delving into `fastapi-cache` library.
     Here are some problems (or potential problems) of this library that I found:
         
     3.1. Caching doesn't work for private endpoints. If I pass a `user` object to my endpoint function and try to use this endpoint by opening in browser, it isn't cached. It's cached only on client side. I'm sure this problem can be solved by implementing custom key-builder, but it looks like a feature that should be by default.
@@ -401,9 +401,13 @@ Also, new version of `fastapi-users` documentation follows the orm style to decl
 
     After the endpoint's function has executed successfully and Response has sent to the client, background task starts.
 
-    If any exception occures during the background task execution, this exception will be passed to the dependencies with `yield`. You can catch it and do whatever you want except raising HTTPException (it doesn't make sence since the Respons has sent and it will couse another exception (RuntimeError: Caught handled exception, but response already started)).
+    **[Depricated]** If any exception occures during the background task execution, this exception will be passed to the dependencies with `yield`. You can catch it and do whatever you want except raising HTTPException (it doesn't make sence since the Respons has sent and it will couse another exception (RuntimeError: Caught handled exception, but response already started)).
 
     Commit: [f805aea](https://github.com/YuriiMotov/FastAPI_study/compare/319e75f9282cf1a655f9b37d8ca25c9a5afc3b1c...f805aeaa8239277d1055d76e223661a69b4f0cbf), fix: [8c7b46d](https://github.com/YuriiMotov/FastAPI_study/compare/507ffd1bda54c7eb88559e728b6c1eb9c3c9d6fc...8c7b46d58cb7f96bc1b5eecbc2b2d137595ac559)
+
+     **Update:** From version 0.106.0 using resources from dependencies with `yield` in background tasks is no longer supported. And now it's OK to raise `HTTPException` in dependencies after yield.
+
+     Commit: [73a36eb](https://github.com/YuriiMotov/FastAPI_study/compare/79983568d77098fc66aec9b1c932e3ed24f8c2e0...73a36ebfe7e6aca423ded5b2bdfd005d4ee92fc5)
 
 
 ### Lesson 15 (Docker and Docker Compose)
