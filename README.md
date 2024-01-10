@@ -50,6 +50,8 @@ Thanks to [Artem Shumeiko]( https://github.com/artemonsh) for this course!
     15.6. [SQLModel](#6-sqlmodel)
 
     15.7. [Monitoring FastAPI with Prometheus and Grafana](#7-monitoring-fastapi-with-prometheus-and-grafana)
+
+    15.8. [Authentication with Keycloak](#8-authentication-with-keycloak)
     
 
 ### Lesson 5 (user registration and authentification with fastapi-users)
@@ -562,7 +564,7 @@ Commit: [056395e](https://github.com/YuriiMotov/FastAPI_study/compare/33ec4ecf89
 
 Several known disadvantages of this implementation: 1) it will work if only each user use one connection, 2) if malicious user steal the refresh token, they can block the ability of user to work with system until stolen token expired.
 
-I think that writing your own authorization methods is not the best solution. It's better to use proven library instead. I'm going to try integration FastAPI with [keycloak](https://www.keycloak.org/) later. 
+I think that writing your own authorization methods is not the best solution. It's better to use proven library instead. I'm going to try integration FastAPI with [keycloak](https://www.keycloak.org/) later. **Update:** [Done](#8-authentication-with-keycloak)
 
 
 #### 5. Request rate limit
@@ -592,3 +594,13 @@ There is a problem: when you run app with `guvicorn` then counters will be broke
 To solve this problem you should create in your app work folder empty folder with name `tmp_multiproc` before starting your app (or clear this folder if it already exists) and add enviroument variable `PROMETHEUS_MULTIPROC_DIR=/tmp_multiproc`. This looks bad but it's official solution.
 
 Commit: [103f958](https://github.com/YuriiMotov/FastAPI_study/compare/bc440230a77bfc06f03fc5628d5dd48073628e45...103f9589023f855bc3fa3b94955de3f0d7f7360c)
+
+
+#### 8. Authentication with **Keycloak**
+
+Implementation of `direct access grants` flow. User (front-end) authenticates on Keycloak server and uses token to access protected FastAPI endpoints.
+
+The main advantage of this approach is that we don't need to create any user managment endpoints, we delegate all of this stuff to Keycloak (which does it securely and provides a user-friendly and flexible UI).
+
+Commit: [ff6770](https://github.com/YuriiMotov/FastAPI_study/compare/81ac4e5bf3c4bf9142cd9eacbb1f4172dbb6cdcd...ff67701fd100de35e5e6a75cfb077cfc8b661604)
+
