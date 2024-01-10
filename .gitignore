@@ -1,4 +1,4 @@
-.env
+*.env
 __pycache__
 *.egg-info
 src/fastapi_course.egg-info/PKG-INFO
